@@ -15,7 +15,11 @@
     >
       <q-carousel-slide :name="1">
         <div class="wrap">
-          <div class="proudcts-slider-page__item">
+          <div
+            v-for="product in products"
+            :key="product.id"
+            class="proudcts-slider-page__item"
+          >
             <div class="proudcts-slider-page__wrapper">
               <div class="proudcts-slider-page__product product">
                 <a href="#" class="product__img">
@@ -24,102 +28,54 @@
                 <div class="product__title">
                   <p>
                     <a href="#"
-                      >BH Fitness F1 G6414V <span>Беговая дорожка</span></a
+                      >{{ product.pretitle }}
+                      <span>{{ product.title }}</span></a
                     >
                   </p>
                 </div>
                 <div class="product__footer">
-                  <div class="product__oldprice">64 990</div>
+                  <div class="product__oldprice">{{ product.oldprice }}</div>
                   <div class="product__buy">
                     <a href="#" class="product__cart">
                       <div></div>
                     </a>
-                    <div class="product__todayprice">64 990</div>
+                    <div class="product__todayprice">
+                      {{ product.todayprice }}
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="proudcts-slider-page__product-hover hover-product">
                 <div class="hover-product__title">
-                  BH Fitness F1 G6414V
-                  <p>Беговая дорожка</p>
+                  {{ product.pretitle }}
+                  <p>{{ product.title }}</p>
                 </div>
                 <div class="hover-product__options">
                   <div class="hover-product__option">
                     Тип беговой дорожки:
-                    <p>Электрическая</p>
+                    <p>{{ product.type }}</p>
                   </div>
                   <div class="hover-product__option">
                     Скорость движения (км/ч):
-                    <p>22</p>
+                    <p>{{ product.speed }}</p>
                   </div>
                   <div class="hover-product__option">
                     Складывание:
-                    <p>Есть</p>
+                    <p>{{ product.option }}</p>
                   </div>
                 </div>
                 <a href="#" class="hover-product__cart">
                   <div></div>
                 </a>
                 <div class="hover-product__footer">
-                  <div class="hover-product__oldprice"><span>64 990</span></div>
+                  <div class="hover-product__oldprice">
+                    <span>{{ product.oldprice }}</span>
+                  </div>
                   <div class="hover-product__price">
                     <div class="hover-product__button">в наличии</div>
-                    <div class="hover-product__todayprice">64 990</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="proudcts-slider-page__item">
-            <div class="proudcts-slider-page__wrapper">
-              <div class="proudcts-slider-page__product product">
-                <a href="#" class="product__img">
-                  <img src="../assets/Catalog/imgItem.webp" alt="not found" />
-                </a>
-                <div class="product__title">
-                  <p>
-                    <a href="#"
-                      >BH Fitness F1 G6414V <span>Беговая дорожка</span></a
-                    >
-                  </p>
-                </div>
-                <div class="product__footer">
-                  <div class="product__oldprice">64 990</div>
-                  <div class="product__buy">
-                    <a href="#" class="product__cart">
-                      <div></div>
-                    </a>
-                    <div class="product__todayprice">64 990</div>
-                  </div>
-                </div>
-              </div>
-              <div class="proudcts-slider-page__product-hover hover-product">
-                <div class="hover-product__title">
-                  BH Fitness F1 G6414V
-                  <p>Беговая дорожка</p>
-                </div>
-                <div class="hover-product__options">
-                  <div class="hover-product__option">
-                    Тип беговой дорожки:
-                    <p>Электрическая</p>
-                  </div>
-                  <div class="hover-product__option">
-                    Скорость движения (км/ч):
-                    <p>22</p>
-                  </div>
-                  <div class="hover-product__option">
-                    Складывание:
-                    <p>Есть</p>
-                  </div>
-                </div>
-                <a href="#" class="hover-product__cart">
-                  <div></div>
-                </a>
-                <div class="hover-product__footer">
-                  <div class="hover-product__oldprice"><span>64 990</span></div>
-                  <div class="hover-product__price">
-                    <div class="hover-product__button">в наличии</div>
-                    <div class="hover-product__todayprice">64 990</div>
+                    <div class="hover-product__todayprice">
+                      {{ product.todayprice }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -127,9 +83,13 @@
           </div>
         </div>
       </q-carousel-slide>
-      <q-carousel-slide :name="2" class="column no-wrap">
+      <q-carousel-slide :name="2">
         <div class="wrap">
-          <div class="proudcts-slider-page__item">
+          <div
+            v-for="product in products"
+            :key="product.id"
+            class="proudcts-slider-page__item"
+          >
             <div class="proudcts-slider-page__wrapper">
               <div class="proudcts-slider-page__product product">
                 <a href="#" class="product__img">
@@ -138,330 +98,54 @@
                 <div class="product__title">
                   <p>
                     <a href="#"
-                      >BH Fitness F1 G6414V <span>Беговая дорожка</span></a
+                      >{{ product.pretitle }}
+                      <span>{{ product.title }}</span></a
                     >
                   </p>
                 </div>
                 <div class="product__footer">
-                  <div class="product__oldprice">64 990</div>
+                  <div class="product__oldprice">{{ product.oldprice }}</div>
                   <div class="product__buy">
                     <a href="#" class="product__cart">
                       <div></div>
                     </a>
-                    <div class="product__todayprice">64 990</div>
+                    <div class="product__todayprice">
+                      {{ product.todayprice }}
+                    </div>
                   </div>
                 </div>
               </div>
               <div class="proudcts-slider-page__product-hover hover-product">
                 <div class="hover-product__title">
-                  BH Fitness F1 G6414V
-                  <p>Беговая дорожка</p>
+                  {{ product.pretitle }}
+                  <p>{{ product.title }}</p>
                 </div>
                 <div class="hover-product__options">
                   <div class="hover-product__option">
                     Тип беговой дорожки:
-                    <p>Электрическая</p>
+                    <p>{{ product.type }}</p>
                   </div>
                   <div class="hover-product__option">
                     Скорость движения (км/ч):
-                    <p>22</p>
+                    <p>{{ product.speed }}</p>
                   </div>
                   <div class="hover-product__option">
                     Складывание:
-                    <p>Есть</p>
+                    <p>{{ product.option }}</p>
                   </div>
                 </div>
                 <a href="#" class="hover-product__cart">
                   <div></div>
                 </a>
                 <div class="hover-product__footer">
-                  <div class="hover-product__oldprice"><span>64 990</span></div>
+                  <div class="hover-product__oldprice">
+                    <span>{{ product.oldprice }}</span>
+                  </div>
                   <div class="hover-product__price">
                     <div class="hover-product__button">в наличии</div>
-                    <div class="hover-product__todayprice">64 990</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="proudcts-slider-page__item">
-            <div class="proudcts-slider-page__wrapper">
-              <div class="proudcts-slider-page__product product">
-                <a href="#" class="product__img">
-                  <img src="../assets/Catalog/imgItem.webp" alt="not found" />
-                </a>
-                <div class="product__title">
-                  <p>
-                    <a href="#"
-                      >BH Fitness F1 G6414V <span>Беговая дорожка</span></a
-                    >
-                  </p>
-                </div>
-                <div class="product__footer">
-                  <div class="product__oldprice">64 990</div>
-                  <div class="product__buy">
-                    <a href="#" class="product__cart">
-                      <div></div>
-                    </a>
-                    <div class="product__todayprice">64 990</div>
-                  </div>
-                </div>
-              </div>
-              <div class="proudcts-slider-page__product-hover hover-product">
-                <div class="hover-product__title">
-                  BH Fitness F1 G6414V
-                  <p>Беговая дорожка</p>
-                </div>
-                <div class="hover-product__options">
-                  <div class="hover-product__option">
-                    Тип беговой дорожки:
-                    <p>Электрическая</p>
-                  </div>
-                  <div class="hover-product__option">
-                    Скорость движения (км/ч):
-                    <p>22</p>
-                  </div>
-                  <div class="hover-product__option">
-                    Складывание:
-                    <p>Есть</p>
-                  </div>
-                </div>
-                <a href="#" class="hover-product__cart">
-                  <div></div>
-                </a>
-                <div class="hover-product__footer">
-                  <div class="hover-product__oldprice"><span>64 990</span></div>
-                  <div class="hover-product__price">
-                    <div class="hover-product__button">в наличии</div>
-                    <div class="hover-product__todayprice">64 990</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </q-carousel-slide>
-      <q-carousel-slide :name="3" class="column no-wrap">
-        <div class="wrap">
-          <div class="proudcts-slider-page__item">
-            <div class="proudcts-slider-page__wrapper">
-              <div class="proudcts-slider-page__product product">
-                <a href="#" class="product__img">
-                  <img src="../assets/Catalog/imgItem.webp" alt="not found" />
-                </a>
-                <div class="product__title">
-                  <p>
-                    <a href="#"
-                      >BH Fitness F1 G6414V <span>Беговая дорожка</span></a
-                    >
-                  </p>
-                </div>
-                <div class="product__footer">
-                  <div class="product__oldprice">64 990</div>
-                  <div class="product__buy">
-                    <a href="#" class="product__cart">
-                      <div></div>
-                    </a>
-                    <div class="product__todayprice">64 990</div>
-                  </div>
-                </div>
-              </div>
-              <div class="proudcts-slider-page__product-hover hover-product">
-                <div class="hover-product__title">
-                  BH Fitness F1 G6414V
-                  <p>Беговая дорожка</p>
-                </div>
-                <div class="hover-product__options">
-                  <div class="hover-product__option">
-                    Тип беговой дорожки:
-                    <p>Электрическая</p>
-                  </div>
-                  <div class="hover-product__option">
-                    Скорость движения (км/ч):
-                    <p>22</p>
-                  </div>
-                  <div class="hover-product__option">
-                    Складывание:
-                    <p>Есть</p>
-                  </div>
-                </div>
-                <a href="#" class="hover-product__cart">
-                  <div></div>
-                </a>
-                <div class="hover-product__footer">
-                  <div class="hover-product__oldprice"><span>64 990</span></div>
-                  <div class="hover-product__price">
-                    <div class="hover-product__button">в наличии</div>
-                    <div class="hover-product__todayprice">64 990</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="proudcts-slider-page__item">
-            <div class="proudcts-slider-page__wrapper">
-              <div class="proudcts-slider-page__product product">
-                <a href="#" class="product__img">
-                  <img src="../assets/Catalog/imgItem.webp" alt="not found" />
-                </a>
-                <div class="product__title">
-                  <p>
-                    <a href="#"
-                      >BH Fitness F1 G6414V <span>Беговая дорожка</span></a
-                    >
-                  </p>
-                </div>
-                <div class="product__footer">
-                  <div class="product__oldprice">64 990</div>
-                  <div class="product__buy">
-                    <a href="#" class="product__cart">
-                      <div></div>
-                    </a>
-                    <div class="product__todayprice">64 990</div>
-                  </div>
-                </div>
-              </div>
-              <div class="proudcts-slider-page__product-hover hover-product">
-                <div class="hover-product__title">
-                  BH Fitness F1 G6414V
-                  <p>Беговая дорожка</p>
-                </div>
-                <div class="hover-product__options">
-                  <div class="hover-product__option">
-                    Тип беговой дорожки:
-                    <p>Электрическая</p>
-                  </div>
-                  <div class="hover-product__option">
-                    Скорость движения (км/ч):
-                    <p>22</p>
-                  </div>
-                  <div class="hover-product__option">
-                    Складывание:
-                    <p>Есть</p>
-                  </div>
-                </div>
-                <a href="#" class="hover-product__cart">
-                  <div></div>
-                </a>
-                <div class="hover-product__footer">
-                  <div class="hover-product__oldprice"><span>64 990</span></div>
-                  <div class="hover-product__price">
-                    <div class="hover-product__button">в наличии</div>
-                    <div class="hover-product__todayprice">64 990</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </q-carousel-slide>
-      <q-carousel-slide :name="4" class="column no-wrap">
-        <div class="wrap">
-          <div class="proudcts-slider-page__item">
-            <div class="proudcts-slider-page__wrapper">
-              <div class="proudcts-slider-page__product product">
-                <a href="#" class="product__img">
-                  <img src="../assets/Catalog/imgItem.webp" alt="not found" />
-                </a>
-                <div class="product__title">
-                  <p>
-                    <a href="#"
-                      >BH Fitness F1 G6414V <span>Беговая дорожка</span></a
-                    >
-                  </p>
-                </div>
-                <div class="product__footer">
-                  <div class="product__oldprice">64 990</div>
-                  <div class="product__buy">
-                    <a href="#" class="product__cart">
-                      <div></div>
-                    </a>
-                    <div class="product__todayprice">64 990</div>
-                  </div>
-                </div>
-              </div>
-              <div class="proudcts-slider-page__product-hover hover-product">
-                <div class="hover-product__title">
-                  BH Fitness F1 G6414V
-                  <p>Беговая дорожка</p>
-                </div>
-                <div class="hover-product__options">
-                  <div class="hover-product__option">
-                    Тип беговой дорожки:
-                    <p>Электрическая</p>
-                  </div>
-                  <div class="hover-product__option">
-                    Скорость движения (км/ч):
-                    <p>22</p>
-                  </div>
-                  <div class="hover-product__option">
-                    Складывание:
-                    <p>Есть</p>
-                  </div>
-                </div>
-                <a href="#" class="hover-product__cart">
-                  <div></div>
-                </a>
-                <div class="hover-product__footer">
-                  <div class="hover-product__oldprice"><span>64 990</span></div>
-                  <div class="hover-product__price">
-                    <div class="hover-product__button">в наличии</div>
-                    <div class="hover-product__todayprice">64 990</div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="proudcts-slider-page__item">
-            <div class="proudcts-slider-page__wrapper">
-              <div class="proudcts-slider-page__product product">
-                <a href="#" class="product__img">
-                  <img src="../assets/Catalog/imgItem.webp" alt="not found" />
-                </a>
-                <div class="product__title">
-                  <p>
-                    <a href="#"
-                      >BH Fitness F1 G6414V <span>Беговая дорожка</span></a
-                    >
-                  </p>
-                </div>
-                <div class="product__footer">
-                  <div class="product__oldprice">64 990</div>
-                  <div class="product__buy">
-                    <a href="#" class="product__cart">
-                      <div></div>
-                    </a>
-                    <div class="product__todayprice">64 990</div>
-                  </div>
-                </div>
-              </div>
-              <div class="proudcts-slider-page__product-hover hover-product">
-                <div class="hover-product__title">
-                  BH Fitness F1 G6414V
-                  <p>Беговая дорожка</p>
-                </div>
-                <div class="hover-product__options">
-                  <div class="hover-product__option">
-                    Тип беговой дорожки:
-                    <p>Электрическая</p>
-                  </div>
-                  <div class="hover-product__option">
-                    Скорость движения (км/ч):
-                    <p>22</p>
-                  </div>
-                  <div class="hover-product__option">
-                    Складывание:
-                    <p>Есть</p>
-                  </div>
-                </div>
-                <a href="#" class="hover-product__cart">
-                  <div></div>
-                </a>
-                <div class="hover-product__footer">
-                  <div class="hover-product__oldprice"><span>64 990</span></div>
-                  <div class="hover-product__price">
-                    <div class="hover-product__button">в наличии</div>
-                    <div class="hover-product__todayprice">64 990</div>
+                    <div class="hover-product__todayprice">
+                      {{ product.todayprice }}
+                    </div>
                   </div>
                 </div>
               </div>
@@ -475,11 +159,17 @@
 
 <script>
 import { ref } from "vue";
-
+import { mapGetters } from "vuex";
+import { useStore } from "vuex";
 export default {
   setup() {
+    const $store = useStore();
+    const products = $store.state.products;
+    console.log(products);
+    console.log(products[0].title);
     return {
       slide: ref(1),
+      products,
     };
   },
 };
