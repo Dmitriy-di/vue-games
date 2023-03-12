@@ -22,10 +22,16 @@
         </q-item-section>
         <q-item-section> Catalog </q-item-section>
       </q-item>
+      <q-item to="/cart" exact clickable v-ripple>
+        <q-item-section avatar>
+          <q-icon name="style" color="white" />
+        </q-item-section>
+        <q-item-section> Cart </q-item-section>
+      </q-item>
     </q-drawer>
 
     <q-page-container>
-      <router-view />
+      <router-view class="q-ma-md" />
     </q-page-container>
 
     <q-footer elevated class="bg-grey-8 text-white">
