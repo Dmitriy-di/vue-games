@@ -81,6 +81,72 @@
               </div>
             </div>
           </div>
+          <div
+            v-for="product in products"
+            :key="product.id"
+            class="proudcts-slider-page__item"
+          >
+            <div class="proudcts-slider-page__wrapper">
+              <div class="proudcts-slider-page__product product">
+                <a href="#" class="product__img">
+                  <img src="../assets/Catalog/imgItem.webp" alt="not found" />
+                </a>
+                <div class="product__title">
+                  <p>
+                    <a href="#"
+                      >{{ product.pretitle }}
+                      <span>{{ product.title }}</span></a
+                    >
+                  </p>
+                </div>
+                <div class="product__footer">
+                  <div class="product__oldprice">{{ product.oldprice }}</div>
+                  <div class="product__buy">
+                    <a href="#" class="product__cart">
+                      <div></div>
+                    </a>
+                    <div class="product__todayprice">
+                      {{ product.todayprice }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="proudcts-slider-page__product-hover hover-product">
+                <div class="hover-product__title">
+                  {{ product.pretitle }}
+                  <p>{{ product.title }}</p>
+                </div>
+                <div class="hover-product__options">
+                  <div class="hover-product__option">
+                    Тип беговой дорожки:
+                    <p>{{ product.type }}</p>
+                  </div>
+                  <div class="hover-product__option">
+                    Скорость движения (км/ч):
+                    <p>{{ product.speed }}</p>
+                  </div>
+                  <div class="hover-product__option">
+                    Складывание:
+                    <p>{{ product.option }}</p>
+                  </div>
+                </div>
+                <a href="#" class="hover-product__cart">
+                  <div></div>
+                </a>
+                <div class="hover-product__footer">
+                  <div class="hover-product__oldprice">
+                    <span>{{ product.oldprice }}</span>
+                  </div>
+                  <div class="hover-product__price">
+                    <div class="hover-product__button">в наличии</div>
+                    <div class="hover-product__todayprice">
+                      {{ product.todayprice }}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </q-carousel-slide>
       <q-carousel-slide :name="2">

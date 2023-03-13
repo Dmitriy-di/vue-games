@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { computed, ref } from "vue";
+import { ref } from "vue";
 import Header from "../components/v-header.vue";
 import Main from "../pages/v-main.vue";
 
