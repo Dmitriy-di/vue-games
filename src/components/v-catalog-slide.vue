@@ -3,6 +3,7 @@
     <div class="proudcts-slider-page__product product">
       <a href="#" class="product__img">
         <img src="../assets/Catalog/imgItem.webp" alt="not found" />
+        
       </a>
       <div class="product__title">
         <p>
@@ -24,6 +25,7 @@
       </div>
     </div>
     <div class="proudcts-slider-page__product-hover hover-product">
+      
       <div class="hover-product__title">
         {{ product.pretitle }}
         <p>{{ product.title }}</p>
@@ -45,6 +47,7 @@
       <a href="#" class="hover-product__cart">
         <div>
           <img src="../assets/Catalog/cart_orange.webp" alt="" />
+
         </div>
       </a>
       <div class="hover-product__footer">
@@ -73,6 +76,8 @@ export default {
     },
   },
   setup(props) {},
+
+   
 };
 </script>
 
