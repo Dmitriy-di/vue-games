@@ -36,19 +36,32 @@
           <p>распродажа</p>
         </div>
         <div class="content-slider__text">
-          <p><span>Успей купить</span> тренажеры</p>
+          <p><span>Успей купить</span> одежду</p>
           <p>по старой цене</p>
           <p>до их <span>повышения</span></p>
         </div>
         <div class="content-slider__footer">
           <div class="content-slider__footerblock">
-            <div class="content-slider__price"><span>от</span> 45 000</div>
-            <a href="#" class="content-slider__button"
-              ><span>Подробнее</span></a
-            >
+            <div class="content-slider__price"><span>от</span> 1000</div>
           </div>
         </div>
       </div>
+    </div>
+  </div>
+
+  <div class="content-category">
+    <div class="content-category_men">
+      <div class="content-category_text">
+        <p>Мужское</p>
+      </div>
+      
+      <img src="~assets/Main/men.jpg" alt="Мужское" />
+    <button>подробнее</button>
+    </div>
+    <div class="content-category_women">
+      <p>Женское</p>
+      <img src="~assets/Main/women.jpg" alt="Мужское" />
+      <button>подробнее</button>
     </div>
   </div>
 </template>
@@ -184,5 +197,10 @@ export default {
       }
     }
   }
+}
+
+.content-category {
+padding: 21px 36px 58px 21px;
+color: rgb(0, 0, 0);
 }
 </style>
