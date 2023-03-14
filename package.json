@@ -18,7 +18,8 @@
     "vuex": "^4.0.2"
   },
   "devDependencies": {
-    "@quasar/app-webpack": "^3.0.0"
+    "@quasar/app-webpack": "^3.0.0",
+    "@quasar/quasar-app-extension-apollo": "^2.0.0-beta.5"
   },
   "browserslist": [
     "last 10 Chrome versions",

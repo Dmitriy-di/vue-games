@@ -1,73 +1,74 @@
 <template>
-  <div class="q-pa-md">
-    <div class="main__wrapper">
-      <q-carousel
-        class="main__carousel"
-        animated
-        v-model="slide"
-        navigation
-        infinite
-        :autoplay="autoplay"
-        transition-prev="slide-right"
-        transition-next="slide-left"
-        @mouseenter="autoplay = false"
-        @mouseleave="autoplay = true"
-      >
-        <q-carousel-slide
-          :name="1"
-          img-src="../assets/Main/1.webp"
-        ></q-carousel-slide>
-        <q-carousel-slide
-          :name="2"
-          img-src="https://cdn.quasar.dev/img/parallax1.jpg"
-        ></q-carousel-slide>
-        <q-carousel-slide
-          :name="3"
-          img-src="https://cdn.quasar.dev/img/parallax2.jpg"
-        ></q-carousel-slide>
-        <q-carousel-slide
-          :name="4"
-          img-src="https://cdn.quasar.dev/img/quasar.jpg"
-        ></q-carousel-slide>
-      </q-carousel>
-      <div class="slider-body__content content-slider">
-        <div class="content-slider__title">
-          <p>Мега</p>
-          <p>распродажа</p>
-        </div>
-        <div class="content-slider__text">
-          <p><span>Успей купить</span> одежду</p>
-          <p>по старой цене</p>
-          <p>до их <span>повышения</span></p>
-        </div>
-        <div class="content-slider__footer">
-          <div class="content-slider__footerblock">
-            <div class="content-slider__price"><span>от</span> 1000</div>
+  <div>
+    <div class="q-pa-md">
+      <div class="main__wrapper">
+        <q-carousel
+          class="main__carousel"
+          animated
+          v-model="slide"
+          navigation
+          infinite
+          :autoplay="autoplay"
+          transition-prev="slide-right"
+          transition-next="slide-left"
+          @mouseenter="autoplay = false"
+          @mouseleave="autoplay = true"
+        >
+          <q-carousel-slide
+            :name="1"
+            img-src="../assets/Main/1.webp"
+          ></q-carousel-slide>
+          <q-carousel-slide
+            :name="2"
+            img-src="https://cdn.quasar.dev/img/parallax1.jpg"
+          ></q-carousel-slide>
+          <q-carousel-slide
+            :name="3"
+            img-src="https://cdn.quasar.dev/img/parallax2.jpg"
+          ></q-carousel-slide>
+          <q-carousel-slide
+            :name="4"
+            img-src="https://cdn.quasar.dev/img/quasar.jpg"
+          ></q-carousel-slide>
+        </q-carousel>
+        <div class="slider-body__content content-slider">
+          <div class="content-slider__title">
+            <p>Мега</p>
+            <p>распродажа</p>
+          </div>
+          <div class="content-slider__text">
+            <p><span>Успей купить</span> одежду</p>
+            <p>по старой цене</p>
+            <p>до их <span>повышения</span></p>
+          </div>
+          <div class="content-slider__footer">
+            <div class="content-slider__footerblock">
+              <div class="content-slider__price"><span>от</span> 1000</div>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="content-category">
-    <q-item-section class="content-category__men">
-      <div class="content-category__text">
-        <p>Мужское</p>
-      </div>
-      <img src="~assets/Main/men.jpg" alt="Мужское" />
-      <div>
+    <div class="content-category">
+      <q-item-section class="content-category__men">
+        <div class="content-category__text">
+          <p>Мужское</p>
+        </div>
+        <img src="~assets/Main/men.jpg" alt="Мужское" />
+        <div>
+          <button>подробнее</button>
+        </div>
+      </q-item-section>
+      <q-item-section class="content-category_women">
+        <p>Женское</p>
+        <div>
+          <img src="~assets/Main/women.jpg" alt="Мужское" />
+        </div>
+
         <button>подробнее</button>
-      </div>
-      
-    </q-item-section>
-    <q-item-section class="content-category_women">
-      <p>Женское</p>
-      <div>
-        <img src="~assets/Main/women.jpg" alt="Мужское" />
-      </div>
-      
-      <button>подробнее</button>
-    </q-item-section>
+      </q-item-section>
+    </div>
   </div>
 </template>
 
@@ -208,14 +209,12 @@ export default {
   padding: 21px 36px 58px 21px;
   color: rgb(0, 0, 0);
   display: flex;
- justify-content: space-between;
-&__men {
-  object-fit: cover;
-}
+  justify-content: space-between;
+  &__men {
+    object-fit: cover;
+  }
   &__text {
-   position: relative ;
-   
+    position: relative;
   }
 }
-
 </style>

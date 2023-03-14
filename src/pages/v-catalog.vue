@@ -1,13 +1,13 @@
 <template>
-  <div class="">
-    
-  </div>
+  <div class=""></div>
 </template>
 
 <script>
 import { ref } from "vue";
 import { useStore } from "vuex";
 import Slide from "../components/v-catalog-slide.vue";
+import { useQuery } from "@vue/apollo-composable";
+import gql from "graphql-tag";
 
 export default {
   components: {
@@ -16,13 +16,29 @@ export default {
   setup() {
     const $store = useStore();
     const products = $store.state.products;
-    console.log();
+
+    const { result, loading, error } = useQuery(gql`
+      query MyQuery {
+        products {
+          category
+          gender
+          id
+          name
+          oldprice
+          todayprice
+        }
+      }
+    `);
+    console.log(result.value);
+
     return {
       slide: ref(1),
       products,
+      result,
+      loading,
+      error,
     };
   },
-
 };
 </script>
 
