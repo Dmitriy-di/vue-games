@@ -50,19 +50,24 @@
   </div>
 
   <div class="content-category">
-    <div class="content-category_men">
-      <div class="content-category_text">
+    <q-item-section class="content-category__men">
+      <div class="content-category__text">
         <p>Мужское</p>
       </div>
-      
       <img src="~assets/Main/men.jpg" alt="Мужское" />
-    <button>подробнее</button>
-    </div>
-    <div class="content-category_women">
+      <div>
+        <button>подробнее</button>
+      </div>
+      
+    </q-item-section>
+    <q-item-section class="content-category_women">
       <p>Женское</p>
-      <img src="~assets/Main/women.jpg" alt="Мужское" />
+      <div>
+        <img src="~assets/Main/women.jpg" alt="Мужское" />
+      </div>
+      
       <button>подробнее</button>
-    </div>
+    </q-item-section>
   </div>
 </template>
 
@@ -200,7 +205,17 @@ export default {
 }
 
 .content-category {
-padding: 21px 36px 58px 21px;
-color: rgb(0, 0, 0);
+  padding: 21px 36px 58px 21px;
+  color: rgb(0, 0, 0);
+  display: flex;
+ justify-content: space-between;
+&__men {
+  object-fit: cover;
 }
+  &__text {
+   position: relative ;
+   
+  }
+}
+
 </style>

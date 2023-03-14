@@ -46,6 +46,7 @@ export default createStore({
         speed: 22,
         option: "Есть",
       },
+      
     ],
 
     men: {
