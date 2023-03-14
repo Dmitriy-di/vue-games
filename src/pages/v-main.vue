@@ -90,7 +90,7 @@ export default {
     line-height: 1.2;
     line-height: 43px;
     font-size: 48px;
-    color: #333333;
+    color: #f30505;
     text-transform: uppercase;
     margin: 0 0 53px 0;
     p {
@@ -108,7 +108,7 @@ export default {
   &__text {
     font-family: Roboto-Black;
     text-transform: uppercase;
-    color: #333333;
+    color: #f11b1b;
     font-size: 14px;
     line-height: 24px;
     margin: 0 0 16px 0;
@@ -122,13 +122,13 @@ export default {
       &:nth-child(2) {
         color: #ffffff;
         display: inline-block;
-        background-color: #979797;
+        background-color: #948f8f;
         padding: 7px 9px;
         line-height: 11px;
       }
       &:last-child {
         span {
-          color: #979797;
+          color: #f68038;
         }
       }
     }
