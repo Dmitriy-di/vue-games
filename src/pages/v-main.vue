@@ -8,7 +8,6 @@
         navigation
         infinite
         :autoplay="autoplay"
-        arrows
         transition-prev="slide-right"
         transition-next="slide-left"
         @mouseenter="autoplay = false"
