@@ -36,20 +36,38 @@
           <p>распродажа</p>
         </div>
         <div class="content-slider__text">
-          <p><span>Успей купить</span> тренажеры</p>
+          <p><span>Успей купить</span> одежду</p>
           <p>по старой цене</p>
           <p>до их <span>повышения</span></p>
         </div>
         <div class="content-slider__footer">
           <div class="content-slider__footerblock">
-            <div class="content-slider__price"><span>от</span> 45 000</div>
-            <a href="#" class="content-slider__button"
-              ><span>Подробнее</span></a
-            >
+            <div class="content-slider__price"><span>от</span> 1000</div>
           </div>
         </div>
       </div>
     </div>
+  </div>
+
+  <div class="content-category">
+    <q-item-section class="content-category__men">
+      <div class="content-category__text">
+        <p>Мужское</p>
+      </div>
+      <img src="~assets/Main/men.jpg" alt="Мужское" />
+      <div>
+        <button>подробнее</button>
+      </div>
+      
+    </q-item-section>
+    <q-item-section class="content-category_women">
+      <p>Женское</p>
+      <div>
+        <img src="~assets/Main/women.jpg" alt="Мужское" />
+      </div>
+      
+      <button>подробнее</button>
+    </q-item-section>
   </div>
 </template>
 
@@ -90,7 +108,7 @@ export default {
     line-height: 1.2;
     line-height: 43px;
     font-size: 48px;
-    color: #333333;
+    color: #f30505;
     text-transform: uppercase;
     margin: 0 0 53px 0;
     p {
@@ -108,7 +126,7 @@ export default {
   &__text {
     font-family: Roboto-Black;
     text-transform: uppercase;
-    color: #333333;
+    color: #f11b1b;
     font-size: 14px;
     line-height: 24px;
     margin: 0 0 16px 0;
@@ -122,13 +140,13 @@ export default {
       &:nth-child(2) {
         color: #ffffff;
         display: inline-block;
-        background-color: #979797;
+        background-color: #948f8f;
         padding: 7px 9px;
         line-height: 11px;
       }
       &:last-child {
         span {
-          color: #979797;
+          color: #f68038;
         }
       }
     }
@@ -185,4 +203,19 @@ export default {
     }
   }
 }
+
+.content-category {
+  padding: 21px 36px 58px 21px;
+  color: rgb(0, 0, 0);
+  display: flex;
+ justify-content: space-between;
+&__men {
+  object-fit: cover;
+}
+  &__text {
+   position: relative ;
+   
+  }
+}
+
 </style>
