@@ -50,8 +50,8 @@
       </div>
     </div>
 
-    <div class="content-category">
-      <q-item-section class="content-category__men">
+    <div class="content-category__panel-options">
+      <div class="content-category__men">
         <div class="content-category__text">
           <p>Мужское</p>
         </div>
@@ -61,8 +61,8 @@
             ><button @click="clickMale">подробнее</button></router-link
           >
         </div>
-      </q-item-section>
-      <q-item-section class="content-category_women">
+      </div>
+      <div class="content-category_women">
         <p>Женское</p>
         <div>
           <img src="~assets/Main/women.jpg" alt="Мужское" />
@@ -70,7 +70,7 @@
         <router-link to="/catalog"
           ><button @click="clickFemale">подробнее</button></router-link
         >
-      </q-item-section>
+      </div>
     </div>
   </div>
 </template>

@@ -187,6 +187,7 @@ export default {
   }
 }
 .catalog {
+  padding: 21px 36px 58px 21px;
   margin: 180px 0 0 0;
   background-color: #e4dcdc;
   &__wrap {
