@@ -5,11 +5,12 @@
         <div class="q-gutter-md">
           <q-badge color="secondary" multi-line> "{{ model }}" </q-badge>
 
-          <q-select
+          <q-select 
+            class="category"
             filled
             v-model="model"
             :options="options"
-            label="Multi with toggle"
+            label="Категория"
             emit-value
             map-options
           >
@@ -187,8 +188,7 @@ export default {
   }
 }
 .catalog {
-  padding: 21px 36px 58px 21px;
-  margin: 180px 0 0 0;
+  padding: 21px 52px 58px 21px;
   background-color: #e4dcdc;
   &__wrap {
     display: flex;
@@ -229,5 +229,9 @@ export default {
 
   &__view {
   }
+}
+
+.category {
+  margin-top: 5px;
 }
 </style>
