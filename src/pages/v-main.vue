@@ -57,7 +57,9 @@
         </div>
         <img src="~assets/Main/men.jpg" alt="Мужское" />
         <div>
-          <button>подробнее</button>
+          <router-link to="/catalog"
+            ><button @click="clickMale">подробнее</button></router-link
+          >
         </div>
       </q-item-section>
       <q-item-section class="content-category_women">
@@ -65,8 +67,9 @@
         <div>
           <img src="~assets/Main/women.jpg" alt="Мужское" />
         </div>
-
-        <button>подробнее</button>
+        <router-link to="/catalog"
+          ><button @click="clickFemale">подробнее</button></router-link
+        >
       </q-item-section>
     </div>
   </div>
@@ -76,8 +79,34 @@
 import { ref } from "vue";
 
 export default {
-  setup() {
+  props: {
+    male: {
+      type: String,
+      default() {
+        return {};
+      },
+    },
+    famale: {
+      type: String,
+      default() {
+        return {};
+      },
+    },
+  },
+  emits: ["male", "female"],
+  setup(props) {
+    const male = "Мужская одежда";
+    const female = "Женская одежда";
+    const clickMale = function () {
+      emit("clickMale", male);
+    };
+    const clickFemale = function () {
+      emit("clickFemale", female);
+    };
+
     return {
+      clickMale,
+      clickFemale,
       slide: ref(1),
       autoplay: ref(true),
     };
