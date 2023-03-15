@@ -10,7 +10,6 @@
             v-model="model"
             :options="options"
             label="Multi with toggle"
-            multiple
             emit-value
             map-options
           >
@@ -47,7 +46,7 @@
 import { watch, ref, computed, reactive, onMounted } from "vue";
 import { useStore } from "vuex";
 import Slide from "../components/v-catalog-slide.vue";
-import { useQuery, provideApolloClient } from "@vue/apollo-composable";
+import { useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import { useMutation } from "@vue/apollo-composable";
 
@@ -57,30 +56,43 @@ export default {
   },
   setup() {
     const products = reactive([]);
+    const productsReserve = reactive([]);
     const model = ref([]);
 
     watch(model, () => {
-      const { result, loading, error } = useQuery(gql`
-        query MyQuery {
-          products(
-            where: {
-              category: { _eq: "Бриджи" }
-              _and: { gender: { _eq: true } }
-            }
-          ) {
-            category
-            discount
-            gender
-            id
-            name
-            oldprice
-            todayprice
-            url
-          }
-        }
-      `);
-      products.values = result?.value?.products;
-      console.log(result?.value?.products);
+      // const { result, loading, error } = useQuery(gql`
+      //   query MyQuery {
+      //     products(
+      //       where: {
+      //         category: { _eq: "Бриджи" }
+      //         _and: { gender: { _eq: true } }
+      //       }
+      //     ) {
+      //       category
+      //       discount
+      //       gender
+      //       id
+      //       name
+      //       oldprice
+      //       todayprice
+      //       url
+      //     }
+      //   }
+      // `);
+      console.log(model.value);
+      switch (model.value) {
+        case "Мужская одежда":
+          products.values = productsReserve.values.filter(
+            (p) => p.gender == true
+          );
+          break;
+        case "Женская одежда":
+          products.values = productsReserve.values.filter(
+            (p) => p.gender == false
+          );
+          break;
+      }
+      return products;
     });
 
     const { result, loading, error } = useQuery(gql`
@@ -97,25 +109,24 @@ export default {
         }
       }
     `);
+    productsReserve.values = result?.value?.products;
     products.values = result?.value?.products;
-
     return {
-      slide: ref(1),
       products,
       model,
 
       options: [
         {
           label: "Мужская одежда",
-          value: 1,
+          value: "Мужская одежда",
         },
         {
-          label: "Женская",
-          value: 2,
+          label: "Женская одежда",
+          value: "Женская одежда",
         },
         {
           label: "По цене",
-          value: 3,
+          value: "price",
         },
         {
           label: "Apple",
