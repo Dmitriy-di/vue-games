@@ -13,9 +13,9 @@
         <div class="registration-body__wrapper">
           <div class="registration-body__column">
             <div class="actions-product__quantity quantity">
-              <button class="quantity__button quantity__button_left" >-</button>
+              <button class="quantity__button quantity__button_left" @click="deleteFromCart">-</button>
               <input class="quantity__input" type="text" value="1" />
-              <button class="quantity__button quantity__button_right">+</button>
+              <button class="quantity__button quantity__button_right" @click="addToCart" >+</button>
             </div>
           </div>
           <div class="registration-body__column">
@@ -35,7 +35,19 @@
   </div>
 </template>
 
-<script></script>
+<script>
+export default {
+methods: {
+        addToCart() {
+            this.$emit("addToCart");
+        },
+        deleteFromCart() {
+            this.$emit("deleteFromCart");
+        },
+    },
+  }
+
+</script>
 
 <style lang="scss">
 .registration-body {
