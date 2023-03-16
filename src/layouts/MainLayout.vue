@@ -49,7 +49,7 @@
 
 <script>
 import { ref } from "vue";
-import Header from "../components/v-header.vue";
+import Header from "../pages/v-header.vue";
 import Main from "../pages/v-main.vue";
 
 export default {

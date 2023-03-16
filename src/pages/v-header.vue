@@ -7,6 +7,7 @@
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
           </q-avatar> -->
         LOGO
+        <Registration/>
       </q-toolbar-title>
     </q-toolbar>
     <q-toolbar class="header__bottom">
@@ -59,7 +60,15 @@
 </template>
 
 <script>
+
+import Registration from "../components/v-registration.vue";
+
 export default {
+
+  components:{
+    Registration
+  },
+
   props: {},
   setup(props, { emit }) {
     const toggleLeftDrawer = function () {
