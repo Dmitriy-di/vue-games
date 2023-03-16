@@ -1,6 +1,54 @@
 <template>
   <div class="proudcts-slider-page__wrapper">
-    <div class="proudcts-slider-page__product product">
+    <div class="proudcts-slider-page__item">
+      <div class="proudcts-slider-page__wrapper">
+        <div class="proudcts-slider-page__product product">
+          <div class="product__img">
+            <img :src="require('../assets/Catalog/' + product.url)" />
+          </div>
+          <div class="product__title">
+            <p>
+              <div>{{product.category}}<span>{{product.name}}</span></div>
+            </p>
+          </div>
+          <div class="product__footer">
+            <div class="product__oldprice">{{product.oldprice}}</div>
+            <div class="product__buy">
+              <a href="#" class="product__cart">
+                <div></div>
+              </a>
+              <div class="product__todayprice">{{product.todayprice}}</div>
+            </div>
+          </div>
+        </div>
+        <div class="proudcts-slider-page__product-hover hover-product">
+          <div class="hover-product__title">
+            <p>{{product.name}}</p>
+          </div>
+          <div class="hover-product__options">
+            <div class="hover-product__option">
+              Категория:
+              <p>{{product.category}}</p>
+            </div>
+          </div>
+          
+          <div class="hover-product__cart" @click="sendProdToCart(product)">
+            <div>
+                <img src="../assets/Catalog/cart_orange.webp" alt="" />
+
+            </div>
+            </div>
+          <div class="hover-product__footer">
+            <div class="hover-product__oldprice"><span>{{product.oldprice}}</span></div>
+            <div class="hover-product__price">
+              <div class="hover-product__button">в наличии</div>
+              <div class="hover-product__todayprice">{{product.todayprice}}</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- <div class="proudcts-slider-page__product product">
       <div class="product__img">
         <img :src="require('../assets/Catalog/' + product.url)" />
       </div>
@@ -51,7 +99,7 @@
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -405,7 +453,7 @@ export default {
     padding: 0 10px;
     border-radius: 20px;
     font-family: Roboto-Light;
-    font-size: 14px;
+    font-size: 25px;
     line-height: 18px;
     color: #f68038;
     height: 21px;

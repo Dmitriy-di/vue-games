@@ -62,6 +62,9 @@ export default {
 
     watch(model, () => {
       switch (model.value) {
+        case "Все товары":
+          products.values = productsReserve.values;
+          break;
         case "Мужская одежда":
           products.values = productsReserve.values.filter(
             (p) => p.gender == true
@@ -165,6 +168,10 @@ export default {
 
       options: [
         {
+          label: "Все товары",
+          value: "Все товары",
+        },
+        {
           label: "Мужская одежда",
           value: "Мужская одежда",
         },
@@ -175,14 +182,6 @@ export default {
         {
           label: "По цене",
           value: "По цене",
-        },
-        {
-          label: "Apple",
-          value: "123",
-        },
-        {
-          label: "Oracle",
-          value: 5,
         },
       ],
     };

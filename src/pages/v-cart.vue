@@ -1,6 +1,5 @@
 <template>
   <div>
-    <CartForm />
     <div class="order-body__title">Ваш заказ</div>
 
     <CartItem
@@ -10,6 +9,7 @@
       :product="product"
       @prodArr="prodArr.value"
     />
+    <CartForm />
     <div class="registration-body__result">
       <div class="registration-body__total">
         Итого: <span>{{ sum.value }} ₽</span>
