@@ -6,10 +6,11 @@
           <q-badge color="secondary" multi-line> "{{ model }}" </q-badge>
 
           <q-select
+            class="category"
             filled
             v-model="model"
             :options="options"
-            label="Multi with toggle"
+            label="Категория"
             emit-value
             map-options
           >
@@ -34,7 +35,8 @@
     </div>
     <div class="catalog__wrap">
       <Slide
-        v-for="product in products.values"
+        v-for="(product, index) in products.values"
+        @click="sendProdToCart(index)"
         :key="product.id"
         :product="product"
       />
@@ -43,8 +45,7 @@
 </template>
 
 <script>
-import { watch, ref, computed, reactive, onMounted } from "vue";
-import { useStore } from "vuex";
+import { watch, ref, computed, reactive, onMounted, provide } from "vue";
 import Slide from "../components/v-catalog-slide.vue";
 import { useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
@@ -60,26 +61,6 @@ export default {
     const model = ref([]);
 
     watch(model, () => {
-      // const { result, loading, error } = useQuery(gql`
-      //   query MyQuery {
-      //     products(
-      //       where: {
-      //         category: { _eq: "Бриджи" }
-      //         _and: { gender: { _eq: true } }
-      //       }
-      //     ) {
-      //       category
-      //       discount
-      //       gender
-      //       id
-      //       name
-      //       oldprice
-      //       todayprice
-      //       url
-      //     }
-      //   }
-      // `);
-      console.log(model.value);
       switch (model.value) {
         case "Мужская одежда":
           products.values = productsReserve.values.filter(
@@ -107,7 +88,6 @@ export default {
           category
           discount
           gender
-          id
           name
           oldprice
           todayprice
@@ -117,9 +97,56 @@ export default {
     `);
     productsReserve.values = result?.value?.products;
     products.values = result?.value?.products;
+
+    const { mutate: sendProdToCart } = useMutation(
+      gql`
+        mutation MyMutation(
+          $category: String!
+          $discount: Int!
+          $gender: Boolean!
+          $name: String!
+          $oldprice: Int!
+          $todayprice: Int!
+          $url: String!
+        ) {
+          insert_cartItems_one(
+            object: {
+              category: $category
+              discount: $discount
+              gender: $gender
+              name: $name
+              oldprice: $oldprice
+              todayprice: $todayprice
+              url: $url
+            }
+          ) {
+            category
+            discount
+            gender
+            name
+            oldprice
+            todayprice
+            url
+          }
+        }
+      `,
+      () => ({
+        variables: {
+          category: "sdf",
+          discount: 234,
+          gender: true,
+          name: "svdfj",
+          oldprice: 934,
+          todayprice: 345,
+          url: "soidj",
+        },
+      })
+    );
+
     return {
       products,
       model,
+      sendProdToCart,
 
       options: [
         {
@@ -187,7 +214,7 @@ export default {
   }
 }
 .catalog {
-  margin: 180px 0 0 0;
+  padding: 21px 52px 58px 21px;
   background-color: #e4dcdc;
   &__wrap {
     display: flex;
@@ -228,5 +255,9 @@ export default {
 
   &__view {
   }
+}
+
+.category {
+  margin-top: 5px;
 }
 </style>
