@@ -37,7 +37,7 @@
           <p>{{ product.option }}</p>
         </div>
       </div>
-      <div @click="sendProdToCart(product)">
+      <div class="btnAdd" @click="sendProdToCart(product)">
         <img src="../assets/Catalog/cart_orange.webp" alt="" />
       </div>
       <div class="hover-product__footer">
@@ -282,6 +282,9 @@ export default {
       color: #999999;
     }
   }
+}
+.btnAdd {
+  cursor: pointer;
 }
 .product {
   &__img {

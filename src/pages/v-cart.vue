@@ -4,13 +4,17 @@
     <div class="order-body__title">Ваш заказ</div>
 
     <CartItem
+      v-model="productAll"
       v-for="product in products.values"
       :key="product.id"
       :product="product"
+      @prodArr="prodArr.value"
     />
     <div class="registration-body__result">
-      <div class="registration-body__total">Итого: <span>120 000 ₽</span></div>
-      <a href="#" class="registration-body__issue">Оформить заказ</a>
+      <div class="registration-body__total">
+        Итого: <span>{{ sum.value }} ₽</span>
+      </div>
+      <div class="registration-body__issue" @click="a">Оформить заказ</div>
     </div>
   </div>
 </template>
@@ -18,7 +22,7 @@
 <script>
 import CartForm from "../components/v-cart-form.vue";
 import CartItem from "../components/v-cart-item.vue";
-import { reactive } from "vue";
+import { ref, reactive, watch } from "vue";
 import { useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 
@@ -29,6 +33,18 @@ export default {
   },
   setup() {
     const products = reactive([]);
+    const productAll = reactive([]);
+    const prodArr = ref([]);
+    const sum = ref(0);
+    const a = function () {
+      console.log(444, prodArr.value);
+    };
+    watch(prodArr.value, () => {
+      for (let el of prodArr.value) {
+        sum.value += Number(el);
+        console.log(234, sum.value);
+      }
+    });
 
     const { result, loading, error } = useQuery(gql`
       query MyQuery {
@@ -48,6 +64,10 @@ export default {
 
     return {
       products,
+      productAll,
+      prodArr,
+      sum,
+      a,
     };
   },
 };
@@ -102,6 +122,7 @@ export default {
   }
 
   &__issue {
+    cursor: pointer;
     display: inline-block;
     border-radius: 15px;
     font-family: "Roboto-Black";

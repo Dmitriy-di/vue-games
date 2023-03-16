@@ -274,11 +274,12 @@
   }
 
   &__input {
-    width: 360px;
+    width: 60%;
+    border: 1px solid #1ab9ce !important;
     height: 31px;
     border: 1px solid #e5e5e5;
     font-family: "Roboto-Black";
-    font-size: 14px;
+    font-size: 18px;
     line-height: 40px;
     color: #333333;
     @media (max-width: 1200px) {
@@ -307,7 +308,7 @@
 
   &__label {
     font-family: "Roboto-Black";
-    font-size: 14px;
+    font-size: 18px;
     line-height: 40px;
     color: #333333;
     margin: 0 20px 0 0;

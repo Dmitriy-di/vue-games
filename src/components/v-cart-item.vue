@@ -17,7 +17,7 @@
             <div class="actions-product__quantity quantity">
               <button
                 class="quantity__button quantity__button_left"
-                @click="deleteFromCart"
+                @click="deleteCartItem(product)"
               >
                 -
               </button>
@@ -28,7 +28,7 @@
               />
               <button
                 class="quantity__button quantity__button_right"
-                @click="addToCart"
+                @click="addToCartItem(product)"
               >
                 +
               </button>
@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import { ref, onMounted, watch, computed } from "vue";
+import { ref } from "vue";
 
 export default {
   props: {
@@ -58,24 +58,38 @@ export default {
         return {};
       },
     },
+    prodObj: {
+      type: Object,
+      default() {
+        [];
+      },
+    },
   },
-  setup() {
+  setup(props, context) {
+    const prodObj = ref([]);
+
     const quantityProd = ref(1);
 
-    const addToCart = function () {
+    const addToCartItem = function (product) {
+      prodObj.value.push(product.id);
       quantityProd.value += 1;
+      context.emit("prodObj", prodObj.value);
+      console.log(prodObj.value);
     };
 
-    const deleteFromCart = function () {
+    const deleteCartItem = function (product) {
+      prodObj.value.push(product.id);
       if (quantityProd.value > 0) {
         quantityProd.value -= 1;
+        context.emit("prodObj", prodObj.value);
       }
     };
 
     return {
-      addToCart,
-      deleteFromCart,
+      addToCartItem,
+      deleteCartItem,
       quantityProd,
+      prodObj,
     };
   },
 };
@@ -83,6 +97,9 @@ export default {
 
 <style lang="scss">
 .registration-body {
+  &__title {
+    font-size: 20px;
+  }
   &__form {
     margin: 28px 0 80px 0;
   }
@@ -105,13 +122,14 @@ export default {
   }
 
   &__purchases {
+    height: 250px;
   }
 
   &__purchase {
+    height: 100%;
     display: flex;
     align-items: center;
     position: relative;
-    padding: 25px 55px 25px 25px;
     margin: 0 0 11px 0;
     @media (max-width: 700px) {
       flex-wrap: wrap;
@@ -119,8 +137,8 @@ export default {
   }
 
   &__img {
-    flex: 0 0 106px;
-    height: 100px;
+    flex: 0 0 136px;
+    height: 100%;
     position: relative;
     margin: 0 46px 0 0;
     img {
@@ -129,6 +147,7 @@ export default {
       top: 0;
       width: 100%;
       height: 100%;
+      object-fit: cover;
     }
   }
 
@@ -143,7 +162,7 @@ export default {
     font-family: "Roboto-Black";
     font-size: 24px;
     line-height: 24px;
-    color: #333333;
+    color: #1ab9ce;
   }
 
   &__wrapper {
@@ -176,9 +195,9 @@ export default {
 
   &__label {
     font-family: "Roboto-Light";
-    font-size: 16px;
+    font-size: 25px;
     line-height: 22px;
-    color: #999999;
+    color: black;
   }
 }
 
@@ -227,6 +246,10 @@ export default {
     color: #333333;
   }
 
+  &__button_tab {
+    width: 100%;
+  }
+
   &__quantity {
   }
 
@@ -251,8 +274,9 @@ export default {
   display: flex;
   align-items: center;
   &__button {
-    width: 20px;
-    height: 17px;
+    width: 40px;
+    height: 40px;
+    font-size: 25px;
     &_left {
       margin: 0 12px 0 0;
 
@@ -281,7 +305,8 @@ export default {
     font-family: Roboto-Black;
     font-size: 16px;
     line-height: 1.2;
-    color: #999999;
+    color: #1ab9ce;
+    font-size: 25px;
   }
 }
 </style>
