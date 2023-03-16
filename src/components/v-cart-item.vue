@@ -74,7 +74,6 @@ export default {
       prodObj.value.push(product.id);
       quantityProd.value += 1;
       context.emit("prodObj", prodObj.value);
-      console.log(prodObj.value);
     };
 
     const deleteCartItem = function (product) {

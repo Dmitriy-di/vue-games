@@ -33,10 +33,9 @@
           </div>
           
           <div class="hover-product__cart" @click="sendProdToCart(product)">
-            <div>
+            <q-item class="q-item-car-img" v-ripple>
                 <img src="../assets/Catalog/cart_orange.webp" alt="" />
-
-            </div>
+            </q-item>
             </div>
           <div class="hover-product__footer">
             <div class="hover-product__oldprice"><span>{{product.oldprice}}</span></div>
@@ -48,58 +47,6 @@
         </div>
       </div>
     </div>
-    <!-- <div class="proudcts-slider-page__product product">
-      <div class="product__img">
-        <img :src="require('../assets/Catalog/' + product.url)" />
-      </div>
-      <div class="product__title">
-        <p>
-          {{ product.pretitle }} <span>{{ product.title }}</span>
-        </p>
-      </div>
-      <div class="product__footer">
-        <div class="product__oldprice">{{ product.oldprice }}</div>
-        <div class="product__buy">
-          <div class="product__cart">
-            <div></div>
-          </div>
-          <div class="product__todayprice">
-            {{ product.todayprice }}
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="proudcts-slider-page__product-hover hover-product">
-      <div class="hover-product__title">
-        {{ product.pretitle }}
-        <p>{{ product.title }}</p>
-      </div>
-      <div class="hover-product__options">
-        <div class="hover-product__option">
-          <p>{{ product.type }}</p>
-        </div>
-        <div class="hover-product__option">
-          <p>{{ product.category }}</p>
-        </div>
-        <div class="hover-product__option">
-          <p>{{ product.option }}</p>
-        </div>
-      </div>
-      <div class="btnAdd" @click="sendProdToCart(product)">
-        <img src="../assets/Catalog/cart_orange.webp" alt="" />
-      </div>
-      <div class="hover-product__footer">
-        <div class="hover-product__oldprice">
-          <span>{{ product.oldprice }}</span>
-        </div>
-        <div class="hover-product__price">
-          <div class="hover-product__button">в наличии</div>
-          <div class="hover-product__todayprice">
-            {{ product.todayprice }}
-          </div>
-        </div>
-      </div>
-    </div> -->
   </div>
 </template>
 
@@ -178,6 +125,11 @@ export default {
 </script>
 
 <style lang="scss">
+.q-item-car-img{
+  display: block;
+  cursor: pointer;
+  height: 70px;
+}
 .proudcts-slider-page {
   &__slider-catalog {
     .product__todayprice {

@@ -36,9 +36,7 @@ export default {
     const productAll = reactive([]);
     const prodArr = ref([]);
     const sum = ref(0);
-    const a = function () {
-      console.log(444, prodArr.value);
-    };
+    const a = function () {};
     watch(prodArr.value, () => {
       for (let el of prodArr.value) {
         sum.value += Number(el);
