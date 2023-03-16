@@ -63,18 +63,8 @@
             class="block-registration__input block-registration__input_b"
           ></textarea>
         </div>
-        <div class="block-registration__subscribe">
-          <input
-            class="block-registration__checkbox"
-            id="checkbox"
-            type="checkbox"
-          />
-          <label for="checkbox" class="block-registration__text"
-            >Подписаться на новости и скидки</label
-          >
-          
-        </div>
-        &nbsp;<span>*</span> Поля, обязательные для заполнения<br>
+        <div class="block-registration__subscribe"></div>
+        &nbsp;<span>*</span> Поля, обязательные для заполнения<br />
       </div>
     </div>
   </div>
@@ -84,165 +74,163 @@
 
 <style lang="scss">
 .registration-body {
-   &__form {
-      margin: 28px 0 80px 0;
-   }
+  &__form {
+    margin: 28px 0 80px 0;
+  }
 
-   &__block {
-   }
+  &__block {
+  }
 
-   &__close {
+  &__close {
+    position: absolute;
+    top: 24px;
+    right: 14px;
+    width: 16px;
+    height: 16px;
+  }
+
+  &__content {
+  }
+
+  &__order {
+  }
+
+  &__purchases {
+  }
+
+  &__purchase {
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 25px 55px 25px 25px;
+    margin: 0 0 11px 0;
+    @media (max-width: 700px) {
+      flex-wrap: wrap;
+    }
+  }
+
+  &__img {
+    flex: 0 0 106px;
+    height: 100px;
+    position: relative;
+    margin: 0 46px 0 0;
+    img {
       position: absolute;
-      top: 24px;
-      right: 14px;
-      width: 16px;
-      height: 16px;
-    
-    
-   }
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+    }
+  }
 
-   &__content {
-   }
+  &__name {
+    flex: 0 0 40%;
+    @media (max-width: 500px) {
+      flex: 0 0 100%;
+    }
+  }
 
-   &__order {
-   }
-
-   &__purchases {
-   }
-
-   &__purchase {
-      display: flex;
-      align-items: center;
-      position: relative;
-      padding: 25px 55px 25px 25px;
-      margin: 0 0 11px 0;
-      @media (max-width: 700px) {
-         flex-wrap: wrap;
-      }
-   }
-
-   &__img {
-      flex: 0 0 106px;
-      height: 100px;
-      position: relative;
-      margin: 0 46px 0 0;
-      img {
-         position: absolute;
-         left: 0;
-         top: 0;
-         width: 100%;
-         height: 100%;
-      }
-   }
-
-   &__name {
-      flex: 0 0 40%;
-      @media (max-width: 500px) {
-         flex: 0 0 100%;
-      }
-   }
-
-   &__title {
-      font-family: "Roboto-Black";
-      font-size: 14px;
-      line-height: 22px;
-      color: #36949f;
-      span {
-         font-family: "Roboto-Light";
-         white-space: nowrap;
-      }
-      margin: 0 0 6px 0;
-   }
-
-   &__price {
-      font-family: "Roboto-Black";
-      font-size: 24px;
-      line-height: 24px;
-      color: #333333;
-   }
-
-   &__wrapper {
-      align-items: center;
-      display: flex;
-      flex-grow: 1;
-      justify-content: space-between;
-      @media (max-width: 1200px) {
-         flex-direction: column;
-         align-items: flex-end;
-      }
-      @media (max-width: 700px) {
-         flex: 1 0 100%;
-         flex-direction: row;
-         align-items: flex-start;
-         margin: 20px 0 0 0;
-      }
-      @media (max-width: 500px) {
-         flex: 0 0 100%;
-         flex-direction: column;
-      }
-   }
-
-   &__column {
-      margin: 0 0 10px 0;
-      &:last-child {
-         margin: 0;
-      }
-   }
-
-   &__label {
+  &__title {
+    font-family: "Roboto-Black";
+    font-size: 14px;
+    line-height: 22px;
+    color: #36949f;
+    span {
       font-family: "Roboto-Light";
-      font-size: 16px;
-      line-height: 22px;
-      color: #999999;
-   }
+      white-space: nowrap;
+    }
+    margin: 0 0 6px 0;
+  }
 
-   &__result {
-      text-align: end;
-   }
+  &__price {
+    font-family: "Roboto-Black";
+    font-size: 24px;
+    line-height: 24px;
+    color: #333333;
+  }
 
-   &__total {
+  &__wrapper {
+    align-items: center;
+    display: flex;
+    flex-grow: 1;
+    justify-content: space-between;
+    @media (max-width: 1200px) {
+      flex-direction: column;
+      align-items: flex-end;
+    }
+    @media (max-width: 700px) {
+      flex: 1 0 100%;
+      flex-direction: row;
+      align-items: flex-start;
+      margin: 20px 0 0 0;
+    }
+    @media (max-width: 500px) {
+      flex: 0 0 100%;
+      flex-direction: column;
+    }
+  }
+
+  &__column {
+    margin: 0 0 10px 0;
+    &:last-child {
+      margin: 0;
+    }
+  }
+
+  &__label {
+    font-family: "Roboto-Light";
+    font-size: 16px;
+    line-height: 22px;
+    color: #999999;
+  }
+
+  &__result {
+    text-align: end;
+  }
+
+  &__total {
+    font-family: "Roboto-Black";
+    font-size: 24px;
+    line-height: 16px;
+    margin: 0 0 28px 0;
+    text-transform: uppercase;
+    color: #333333;
+    @media (max-width: 1200px) {
+      font-size: 18px;
+    }
+    @media (max-width: 500px) {
+      margin: 0 0 15px 0;
+      font-size: 15px;
+    }
+    span {
       font-family: "Roboto-Black";
-      font-size: 24px;
-      line-height: 16px;
-      margin: 0 0 28px 0;
-      text-transform: uppercase;
-      color: #333333;
+      font-size: 36px;
+      line-height: 24px;
+      color: #f68038;
       @media (max-width: 1200px) {
-         font-size: 18px;
+        font-size: 26px;
       }
       @media (max-width: 500px) {
-         margin: 0 0 15px 0;
-         font-size: 15px;
+        font-size: 21px;
       }
-      span {
-         font-family: "Roboto-Black";
-         font-size: 36px;
-         line-height: 24px;
-         color: #f68038;
-         @media (max-width: 1200px) {
-            font-size: 26px;
-         }
-         @media (max-width: 500px) {
-            font-size: 21px;
-         }
-      }
-   }
+    }
+  }
 
-   &__issue {
-      display: inline-block;
-      border-radius: 15px;
-      font-family: "Roboto-Black";
-      font-size: 14px;
-      line-height: 24px;
-      text-transform: uppercase;
-      background-color: #f68038;
-      padding: 5px 20px;
-      color: #ffffff;
-      &:hover {
-         transition-duration: 0.2s;
-         background-color: #1ab9ce;
-      }
-   }
+  &__issue {
+    display: inline-block;
+    border-radius: 15px;
+    font-family: "Roboto-Black";
+    font-size: 14px;
+    line-height: 24px;
+    text-transform: uppercase;
+    background-color: #f68038;
+    padding: 5px 20px;
+    color: #ffffff;
+    &:hover {
+      transition-duration: 0.2s;
+      background-color: #1ab9ce;
+    }
+  }
 }
 
 .block-registration {

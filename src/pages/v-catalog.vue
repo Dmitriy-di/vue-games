@@ -4,7 +4,6 @@
       <div class="q-pa-md" style="max-width: 300px">
         <div class="q-gutter-md">
           <q-badge color="secondary" multi-line> "{{ model }}" </q-badge>
-
           <q-select
             class="category"
             filled
@@ -36,7 +35,6 @@
     <div class="catalog__wrap">
       <Slide
         v-for="(product, index) in products.values"
-        @click="sendProdToCart(index)"
         :key="product.id"
         :product="product"
       />
@@ -47,9 +45,11 @@
 <script>
 import { watch, ref, reactive } from "vue";
 import Slide from "../components/v-catalog-slide.vue";
-import { useQuery } from "@vue/apollo-composable";
+import { useQuery, provideApolloClient } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import { useMutation } from "@vue/apollo-composable";
+import { ApolloClient } from "@apollo/client/core";
+import { getClientOptions } from "src/apollo/index";
 
 export default {
   components: {
@@ -82,67 +82,82 @@ export default {
       return products;
     });
 
-    const { result, loading, error } = useQuery(gql`
-      query MyQuery {
-        products {
-          category
-          discount
-          gender
-          name
-          oldprice
-          todayprice
-          url
-        }
-      }
-    `);
-    productsReserve.values = result?.value?.products;
-    products.values = result?.value?.products;
-
-    const { mutate: sendProdToCart } = useMutation(
-      gql`
-        mutation MyMutation(
-          $category: String!
-          $discount: Int!
-          $gender: Boolean!
-          $name: String!
-          $oldprice: Int!
-          $todayprice: Int!
-          $url: String!
-        ) {
-          insert_cartItems_one(
-            object: {
-              category: $category
-              discount: $discount
-              gender: $gender
-              name: $name
-              oldprice: $oldprice
-              todayprice: $todayprice
-              url: $url
+    const fetching = async () => {
+      try {
+        const { result, loading, error } = await useQuery(gql`
+          query MyQuery {
+            products {
+              category
+              discount
+              gender
+              name
+              oldprice
+              todayprice
+              url
             }
-          ) {
-            category
-            discount
-            gender
-            name
-            oldprice
-            todayprice
-            url
           }
-        }
-      `,
-      () => ({
-        variables: {
-          category: "sdf",
-          discount: 234,
-          gender: true,
-          name: "svdfj",
-          oldprice: 934,
-          todayprice: 345,
-          url: "soidj",
-        },
-      })
-    );
+        `);
+        productsReserve.values = result?.value?.products;
+        products.values = result?.value?.products;
+        console.log(products);
+      } catch (e) {
+        console.log(e);
+      }
+      return products, productsReserve;
+    };
+    fetching();
 
+    const sendProdToCart = function (index) {
+      const apolloClient = new ApolloClient(getClientOptions());
+
+      provideApolloClient(apolloClient);
+
+      const { mutate } = useMutation(
+        gql`
+          mutation MyMutation(
+            $category: String!
+            $discount: Int!
+            $gender: Boolean!
+            $name: String!
+            $oldprice: Int!
+            $todayprice: Int!
+            $url: String!
+          ) {
+            insert_cartItems_one(
+              object: {
+                category: $category
+                discount: $discount
+                gender: $gender
+                name: $name
+                oldprice: $oldprice
+                todayprice: $todayprice
+                url: $url
+              }
+            ) {
+              category
+              discount
+              gender
+              name
+              oldprice
+              todayprice
+              url
+            }
+          }
+        `,
+        () => ({
+          variables: {
+            category: productsReserve.values[index].category,
+            discount: productsReserve.values[index].discount,
+            gender: productsReserve.values[index].gender,
+            name: "svdfj",
+            oldprice: 934,
+            todayprice: 345,
+            url: "soidj",
+          },
+        })
+      );
+      mutate();
+    };
     return {
       products,
       model,

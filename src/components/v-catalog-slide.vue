@@ -1,22 +1,20 @@
 <template>
   <div class="proudcts-slider-page__wrapper">
     <div class="proudcts-slider-page__product product">
-      <a href="#" class="product__img">
+      <div class="product__img">
         <img :src="require('../assets/Catalog/' + product.url)" />
-      </a>
+      </div>
       <div class="product__title">
         <p>
-          <a href="#"
-            >{{ product.pretitle }} <span>{{ product.title }}</span></a
-          >
+          {{ product.pretitle }} <span>{{ product.title }}</span>
         </p>
       </div>
       <div class="product__footer">
         <div class="product__oldprice">{{ product.oldprice }}</div>
         <div class="product__buy">
-          <a href="#" class="product__cart">
+          <div class="product__cart">
             <div></div>
-          </a>
+          </div>
           <div class="product__todayprice">
             {{ product.todayprice }}
           </div>
@@ -30,23 +28,18 @@
       </div>
       <div class="hover-product__options">
         <div class="hover-product__option">
-          Тип беговой дорожки:
           <p>{{ product.type }}</p>
         </div>
         <div class="hover-product__option">
-          Скорость движения (км/ч):
-          <p>{{ product.speed }}</p>
+          <p>{{ product.category }}</p>
         </div>
         <div class="hover-product__option">
-          Складывание:
           <p>{{ product.option }}</p>
         </div>
       </div>
-      <a href="#" class="hover-product__cart">
-        <div>
-          <img src="../assets/Catalog/cart_orange.webp" alt="" />
-        </div>
-      </a>
+      <div @click="sendProdToCart(product)">
+        <img src="../assets/Catalog/cart_orange.webp" alt="" />
+      </div>
       <div class="hover-product__footer">
         <div class="hover-product__oldprice">
           <span>{{ product.oldprice }}</span>
@@ -63,6 +56,11 @@
 </template>
 
 <script>
+import { provideApolloClient } from "@vue/apollo-composable";
+import gql from "graphql-tag";
+import { useMutation } from "@vue/apollo-composable";
+import { ApolloClient } from "@apollo/client/core";
+import { getClientOptions } from "src/apollo/index";
 export default {
   props: {
     product: {
@@ -72,7 +70,62 @@ export default {
       },
     },
   },
-  setup(props) {},
+  setup(props) {
+    const sendProdToCart = function (product) {
+      const apolloClient = new ApolloClient(getClientOptions());
+
+      provideApolloClient(apolloClient);
+
+      const { mutate } = useMutation(
+        gql`
+          mutation MyMutation(
+            $category: String!
+            $discount: Int!
+            $gender: Boolean!
+            $name: String!
+            $oldprice: Int!
+            $todayprice: Int!
+            $url: String!
+          ) {
+            insert_cartItems_one(
+              object: {
+                category: $category
+                discount: $discount
+                gender: $gender
+                name: $name
+                oldprice: $oldprice
+                todayprice: $todayprice
+                url: $url
+              }
+            ) {
+              category
+              discount
+              gender
+              name
+              oldprice
+              todayprice
+              url
+            }
+          }
+        `,
+        () => ({
+          variables: {
+            category: product.category,
+            discount: product.discount,
+            gender: product.gender,
+            name: product.name,
+            oldprice: product.oldprice,
+            todayprice: product.todayprice,
+            url: product.url,
+          },
+        })
+      );
+      mutate();
+    };
+    return {
+      sendProdToCart,
+    };
+  },
 };
 </script>
 

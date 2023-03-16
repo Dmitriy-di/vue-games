@@ -1,52 +1,84 @@
 <template>
   <div class="registration-body__order order-body">
-    <div class="order-body__title">Ваш заказ</div>
     <div class="registration-body__purchases">
       <div class="registration-body__purchase">
-        <div class="registration-body__img"><img src="" alt="" /></div>
+        <div class="registration-body__img">
+          <img :src="require('../assets/Catalog/' + product.url)" alt="" />
+        </div>
         <div class="registration-body__name">
           <div class="registration-body__title">
-            BH Fitness F1 G6414V <span>Беговая дорожка</span>
+            {{ product.category }}
+            <p>{{ product.name }}</p>
           </div>
-          <div class="registration-body__price">64 990 ₽</div>
+          <div class="registration-body__price">{{ product.todayprice }}</div>
         </div>
         <div class="registration-body__wrapper">
           <div class="registration-body__column">
             <div class="actions-product__quantity quantity">
-              <button class="quantity__button quantity__button_left" @click="deleteFromCart">-</button>
-              <input class="quantity__input" type="text" value="1" />
-              <button class="quantity__button quantity__button_right" @click="addToCart" >+</button>
+              <button
+                class="quantity__button quantity__button_left"
+                @click="deleteFromCart"
+              >
+                -
+              </button>
+              <input
+                class="quantity__input"
+                type="text"
+                v-model="quantityProd"
+              />
+              <button
+                class="quantity__button quantity__button_right"
+                @click="addToCart"
+              >
+                +
+              </button>
             </div>
           </div>
           <div class="registration-body__column">
             <div class="registration-body__label">Всего:</div>
-            <div class="registration-body__price">64 990 ₽</div>
+            <div class="registration-body__price">
+              {{ quantityProd * product.todayprice }}
+            </div>
           </div>
         </div>
         <div class="registration-body__close"></div>
-      </div>
-      <div class="registration-body__result">
-        <div class="registration-body__total">
-          Итого: <span>120 000 ₽</span>
-        </div>
-        <a href="#" class="registration-body__issue">Оформить заказ</a>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-export default {
-methods: {
-        addToCart() {
-            this.$emit("addToCart");
-        },
-        deleteFromCart() {
-            this.$emit("deleteFromCart");
-        },
-    },
-  }
+import { ref, onMounted, watch, computed } from "vue";
 
+export default {
+  props: {
+    product: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
+  },
+  setup() {
+    const quantityProd = ref(1);
+
+    const addToCart = function () {
+      quantityProd.value += 1;
+    };
+
+    const deleteFromCart = function () {
+      if (quantityProd.value > 0) {
+        quantityProd.value -= 1;
+      }
+    };
+
+    return {
+      addToCart,
+      deleteFromCart,
+      quantityProd,
+    };
+  },
+};
 </script>
 
 <style lang="scss">
@@ -107,18 +139,6 @@ methods: {
     }
   }
 
-  &__title {
-    font-family: "Roboto-Black";
-    font-size: 14px;
-    line-height: 22px;
-    color: #36949f;
-    span {
-      font-family: "Roboto-Light";
-      white-space: nowrap;
-    }
-    margin: 0 0 6px 0;
-  }
-
   &__price {
     font-family: "Roboto-Black";
     font-size: 24px;
@@ -160,161 +180,108 @@ methods: {
     line-height: 22px;
     color: #999999;
   }
-
-  &__result {
-    text-align: end;
-  }
-
-  &__total {
-    font-family: "Roboto-Black";
-    font-size: 24px;
-    line-height: 16px;
-    margin: 0 0 28px 0;
-    text-transform: uppercase;
-    color: #333333;
-    @media (max-width: 1200px) {
-      font-size: 18px;
-    }
-    @media (max-width: 500px) {
-      margin: 0 0 15px 0;
-      font-size: 15px;
-    }
-    span {
-      font-family: "Roboto-Black";
-      font-size: 36px;
-      line-height: 24px;
-      color: #f68038;
-      @media (max-width: 1200px) {
-        font-size: 26px;
-      }
-      @media (max-width: 500px) {
-        font-size: 21px;
-      }
-    }
-  }
-
-  &__issue {
-    display: inline-block;
-    border-radius: 15px;
-    font-family: "Roboto-Black";
-    font-size: 14px;
-    line-height: 24px;
-    text-transform: uppercase;
-    background-color: #f68038;
-    padding: 5px 20px;
-    color: #ffffff;
-    &:hover {
-      transition-duration: 0.2s;
-      background-color: #1ab9ce;
-    }
-  }
 }
 
 .actions-product {
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: space-between;
-   &__column {
-      position: relative;
-      display: flex;
-      align-items: center;
-      flex-grow: 1;
-      
-      &:last-child {
-         height: 52px;
-         padding: 0 44px 0 0;
-         flex-grow: 0;
-        
-         &::after {
-            content: "";
-            position: absolute;
-            width: 52px;
-            height: 52px;
-            right: 0;
-            top: 0;
-            
-         }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  &__column {
+    position: relative;
+    display: flex;
+    align-items: center;
+    flex-grow: 1;
+
+    &:last-child {
+      height: 52px;
+      padding: 0 44px 0 0;
+      flex-grow: 0;
+
+      &::after {
+        content: "";
+        position: absolute;
+        width: 52px;
+        height: 52px;
+        right: 0;
+        top: 0;
       }
-   }
+    }
+  }
 
-   &__prices {
-   }
+  &__prices {
+  }
 
-   &__old-price {
-      font-family: Roboto-Light;
-      font-size: 18px;
-      line-height: 24px;
-      text-decoration: line-through;
-      color: #999999;
-      margin: 0 0 12px 0;
-   }
+  &__old-price {
+    font-family: Roboto-Light;
+    font-size: 18px;
+    line-height: 24px;
+    text-decoration: line-through;
+    color: #999999;
+    margin: 0 0 12px 0;
+  }
 
-   &__today-price {
+  &__today-price {
+    font-family: Roboto-Black;
+    font-size: 24px;
+    line-height: 24px;
+    color: #333333;
+  }
+
+  &__quantity {
+  }
+
+  &__cart {
+    width: 115px;
+    height: 34px;
+    background-color: #f3f3f3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    span {
       font-family: Roboto-Black;
-      font-size: 24px;
-      line-height: 24px;
-      color: #333333;
-   }
-
-   &__quantity {
-   }
-
-   &__cart {
-      width: 115px;
-      height: 34px;
-      background-color: #f3f3f3;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    
-      span {
-         font-family: Roboto-Black;
-         font-size: 14px;
-         line-height: 16px;
-         text-transform: uppercase;
-         color: #999999;
-      }
-   }
+      font-size: 14px;
+      line-height: 16px;
+      text-transform: uppercase;
+      color: #999999;
+    }
+  }
 }
 .quantity {
-   display: flex;
-   align-items: center;
-   &__button {
-      width: 20px;
-      height: 17px;
-      &_left {
-         margin: 0 12px 0 0;
-         
-         &:hover {
-            transform: rotate(180deg);
-            background: orange;
-            
-         }
-      }
+  display: flex;
+  align-items: center;
+  &__button {
+    width: 20px;
+    height: 17px;
+    &_left {
+      margin: 0 12px 0 0;
 
-      &_right {
-         margin: 0 0 0 12px;
-         
-         &:hover {
-            transform: rotate(0deg);
-             background: orange;
-            
-         }
+      &:hover {
+        transform: rotate(180deg);
+        background: orange;
       }
-   }
+    }
 
-   &__input {
-      width: 56px;
-      height: 33px;
-      background-color: #ffffff;
-      border: 2px solid #e5e5e5;
-      text-align: center;
-      font-family: Roboto-Black;
-      font-size: 16px;
-      line-height: 1.2;
-      color: #999999;
-   }
+    &_right {
+      margin: 0 0 0 12px;
+
+      &:hover {
+        transform: rotate(0deg);
+        background: orange;
+      }
+    }
+  }
+
+  &__input {
+    width: 56px;
+    height: 33px;
+    background-color: #ffffff;
+    border: 2px solid #e5e5e5;
+    text-align: center;
+    font-family: Roboto-Black;
+    font-size: 16px;
+    line-height: 1.2;
+    color: #999999;
+  }
 }
-
-
 </style>
