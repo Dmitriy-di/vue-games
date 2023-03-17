@@ -58,7 +58,7 @@ export default {
   setup() {
     const products = reactive([]);
     const productsReserve = reactive([]);
-    const model = ref([]);
+    const model = ref(["Все товары"]);
 
     watch(model, () => {
       switch (model.value) {
