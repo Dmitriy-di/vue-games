@@ -2,7 +2,7 @@
     <q-dialog v-model="medium">
         <q-card style="width: 450px">
             <q-card-section>
-                <div class="text-h6">Sign up</div>
+                <div class="text-h6">Log in</div>
             </q-card-section>
 
             <q-card-section class="q-pt-none">
@@ -14,11 +14,7 @@
             </q-card-section>
 
             <q-card-section class="q-pt-none">
-                <q-input filled v-model="repaetPassword" label="Repeat password" />
-            </q-card-section>
-
-            <q-card-section class="q-pt-none">
-                <q-btn color="primary" label="Sign up" />
+                <q-btn color="primary" label="Log in" />
             </q-card-section>
         </q-card>
     </q-dialog>
@@ -31,8 +27,7 @@ export default {
     setup(props, { emit }) {
     return {
         login: ref(""),
-        password: ref(""),
-        repaetPassword: ref("")
+        password: ref("")
     };
   },
 }
