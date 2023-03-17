@@ -8,7 +8,7 @@
           </div>
           <div class="product__title">
             <p>
-              <div>{{product.category}}<span>{{product.name}}</span></div>
+              <div>{{product.category}}<p>{{product.name}}</p></div>
             </p>
           </div>
           <div class="product__footer">

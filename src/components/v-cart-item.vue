@@ -49,6 +49,7 @@
 
 <script>
 import { ref } from "vue";
+import { useStore } from "vuex";
 
 export default {
   props: {
@@ -66,8 +67,8 @@ export default {
     },
   },
   setup(props, context) {
+    const store = useStore();
     const prodObj = ref([]);
-
     const quantityProd = ref(1);
 
     const addToCartItem = function (product) {
