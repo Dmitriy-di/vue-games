@@ -1,4 +1,6 @@
 import { createHttpLink, InMemoryCache } from '@apollo/client/core'
+//!clerk
+//!clerk/
 export /* async */ function getClientOptions(/* {app, router, ...} */ options) {
   return Object.assign(
     // General options.

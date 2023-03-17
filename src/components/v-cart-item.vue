@@ -59,12 +59,12 @@ export default {
         return {};
       },
     },
-    prodObj: {
-      type: Object,
-      default() {
-        [];
-      },
-    },
+    // prodObj: {
+    //   type: Object,
+    //   default() {
+    //     [];
+    //   },
+    // },
   },
   setup(props, context) {
     const store = useStore();
