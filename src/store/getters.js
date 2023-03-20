@@ -7,6 +7,6 @@ export const PRODUCTS_FILTER = (state) => {
 	return state.products
 }
 
-export const CART = (state) => {
+export const CART_PRODUCTS = (state) => {
 	return state.cart
 }

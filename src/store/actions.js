@@ -47,4 +47,31 @@ export const GET_PRODUCTS = ({ commit }) => {
 		}
 	};
 	fetching();
+}
+
+export const GET_CART_PRODUCTS = ({ commit }) => {
+	const fetching = async () => {
+		console.log("fetching");
+		try {
+			const { result, loading, error } = useQuery(gql`
+			query MyQuery {
+			  cartItems {
+				 category
+				 discount
+				 gender
+				 name
+				 oldprice
+				 todayprice
+				 url
+				 id
+			  }
+			}
+		 `);
+			commit("setCartProducts", result?.value?.cartItems)
+			console.log(result?.value?.cartItems);
+		} catch (e) {
+			console.log("Ошибка:", e);
+		}
+	};
+	fetching();
 } 

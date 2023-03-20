@@ -4,7 +4,7 @@
 
     <CartItem
       v-model="productAll"
-      v-for="product in products.values"
+      v-for="product in CART_PRODUCTS.values"
       :key="product.id"
       :product="product"
     />
@@ -21,7 +21,7 @@
 <script>
 import CartForm from "../components/v-cart-form.vue";
 import CartItem from "../components/v-cart-item.vue";
-import { reactive, computed } from "vue";
+import { reactive, computed, onMounted } from "vue";
 import { useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import { useStore } from "vuex";
@@ -33,25 +33,15 @@ export default {
   },
   setup() {
     const store = useStore();
-    const products = reactive([]);
-    const { result, loading, error } = useQuery(gql`
-      query MyQuery {
-        cartItems {
-          category
-          discount
-          gender
-          name
-          oldprice
-          todayprice
-          url
-          id
-        }
-      }
-    `);
-    products.values = result?.value?.cartItems;
+    const CART_PRODUCTS = reactive([]);
+    store.dispatch("GET_CART_PRODUCTS");
+
+    onMounted(() => {
+      CART_PRODUCTS.values = computed(() => store.getters.CART_PRODUCTS);
+    });
 
     return {
-      products,
+      CART_PRODUCTS,
     };
   },
 };
