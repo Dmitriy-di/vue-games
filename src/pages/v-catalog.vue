@@ -43,19 +43,25 @@
 </template>
 
 <script>
-import { watch, ref, reactive } from "vue";
+import { watch, ref, reactive, computed } from "vue";
 import Slide from "../components/v-catalog-slide.vue";
 import { useQuery, provideApolloClient } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import { useMutation } from "@vue/apollo-composable";
 import { ApolloClient } from "@apollo/client/core";
 import { getClientOptions } from "src/apollo/index";
+import { useStore } from "vuex";
 
 export default {
   components: {
     Slide,
   },
   setup() {
+    const store = useStore();
+    store.dispatch("GET_PRODUCTS");
+    const PRODUCTS = reactive([]);
+    PRODUCTS.values = computed(() => store.getters.PRODUCTS);
+    console.log(PRODUCTS.values);
     const products = reactive([]);
     const productsReserve = reactive([]);
     const model = ref(["Все товары"]);
@@ -104,7 +110,6 @@ export default {
         );
         productsReserve.values = result?.value?.products;
         products.values = result?.value?.products;
-        console.log(products);
       } catch (e) {
         console.log(e);
       }
@@ -167,7 +172,7 @@ export default {
       products,
       model,
       sendProdToCart,
-
+      PRODUCTS,
       options: [
         {
           label: "Все товары",

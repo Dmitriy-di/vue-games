@@ -52,7 +52,6 @@ export default {
 
     return {
       products,
-      TOTALSUM: computed(() => store.state.state.totalSum),
     };
   },
 };

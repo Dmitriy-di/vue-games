@@ -8,7 +8,6 @@
           </q-avatar> -->
         LOGO
         <div id="user-button"></div>
-        <!-- <Registration /> -->
       </q-toolbar-title>
     </q-toolbar>
     <q-toolbar class="header__bottom">
@@ -63,14 +62,11 @@
         </div>
       </div>
     </q-toolbar>
-    <!-- <Login v-model="showLogIn" />
-    <Registration v-model="showSignUp" /> -->
   </div>
 </template>
 
 <script>
 import { ref } from "vue";
-import Registration from "../components/v-registration.vue";
 import Login from "../components/v-login.vue";
 
 //import Clerk from "@clerk/clerk-js";
@@ -130,7 +126,6 @@ const startClerk = async () => {
 
 export default {
   components: {
-    Registration,
     Login,
   },
 
