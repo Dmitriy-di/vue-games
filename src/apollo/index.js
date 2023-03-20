@@ -1,18 +1,37 @@
 import { createHttpLink, InMemoryCache } from '@apollo/client/core'
-//!clerk
-//!clerk/
+import { setContext } from "@apollo/client/link/context";
+
 export /* async */ function getClientOptions(/* {app, router, ...} */ options) {
+  const httpLink = createHttpLink({
+    uri: "https://firm-dassie-25.hasura.app/v1/graphql",
+  })
+
+  const authLink = setContext((_, { headers }) => {
+    const token = sessionStorage.getItem("token");
+
+    return {
+      headers: {
+        ...headers,
+        Authorization: token ? `Bearer ${token}` : "",
+      }
+    }
+  })
+
   return Object.assign(
-    // General options.
     {
-      link: createHttpLink({
-        uri:
-          process.env.GRAPHQL_URI ||
-          // Change to your graphql endpoint.
-          'https://firm-dassie-25.hasura.app/v1/graphql',
-      }),
+      link: authLink.concat(httpLink),
       cache: new InMemoryCache(),
     },
+    // General options.
+    // {
+    //   link: createHttpLink({
+    //     uri:
+    //       process.env.GRAPHQL_URI ||
+    //       // Change to your graphql endpoint.
+    //       'https://firm-dassie-25.hasura.app/v1/graphql',
+    //   }),
+    //   cache: new InMemoryCache(),
+    // },
     // Specific Quasar mode options.
     process.env.MODE === 'spa'
       ? {

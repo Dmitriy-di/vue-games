@@ -87,19 +87,21 @@ export default {
 
     const fetching = async () => {
       try {
-        const { result, loading, error } = await useQuery(gql`
-          query MyQuery {
-            products {
-              category
-              discount
-              gender
-              name
-              oldprice
-              todayprice
-              url
+        const { result, loading, error } = await useQuery(
+          gql`
+            query MyQuery {
+              products {
+                category
+                discount
+                gender
+                name
+                oldprice
+                todayprice
+                url
+              }
             }
-          }
-        `);
+          `
+        );
         productsReserve.values = result?.value?.products;
         products.values = result?.value?.products;
         console.log(products);
@@ -152,10 +154,10 @@ export default {
             category: productsReserve.values[index].category,
             discount: productsReserve.values[index].discount,
             gender: productsReserve.values[index].gender,
-            name: "svdfj",
-            oldprice: 934,
-            todayprice: 345,
-            url: "soidj",
+            name: productsReserve.values[index].name,
+            oldprice: productsReserve.values[index].oldprice,
+            todayprice: productsReserve.values[index].todayprice,
+            url: productsReserve.values[index].url,
           },
         })
       );

@@ -7,7 +7,7 @@
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
           </q-avatar> -->
         LOGO
-        <div id="user-button">32</div>
+        <div id="user-button"></div>
         <!-- <Registration /> -->
       </q-toolbar-title>
     </q-toolbar>
@@ -86,8 +86,6 @@ const startClerk = async () => {
 
     const userButton = document.getElementById("user-button");
     const authLinks = document.getElementById("auth-links");
-    console.log(userButton);
-    console.log(authLinks);
 
     Clerk.addListener(({ user }) => {
       // Display links conditionally based on user state
@@ -98,7 +96,19 @@ const startClerk = async () => {
       // Mount user button component
       Clerk.mountUserButton(userButton);
       userButton.style.margin = "auto";
-      //==============================================
+
+      sessionStorage.setItem(
+        "token",
+        await Clerk.session?.getToken({ template: "hasura" })
+      );
+      setInterval(
+        async () =>
+          sessionStorage.setItem(
+            "token",
+            await Clerk.session?.getToken({ template: "hasura" })
+          ),
+        1_000
+      );
     }
   } catch (err) {
     console.error("Error starting Clerk: ", err);
@@ -140,6 +150,8 @@ export default {
 </script>
 
 <style lang="scss">
+#user-button {
+}
 #auth-links {
   display: flex;
 }
