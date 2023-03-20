@@ -44,7 +44,7 @@ export const GET_PRODUCTS = ({ commit }) => {
 			commit("setProducts", result?.value?.products)
 			console.log("!!!!!!!!!!!", result?.value);
 		} catch (e) {
-			console.log(e);
+			console.log("Ошибка:", e);
 		}
 	};
 	fetching();

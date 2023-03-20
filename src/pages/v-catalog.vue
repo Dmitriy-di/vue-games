@@ -34,7 +34,7 @@
     </div>
     <div class="catalog__wrap">
       <Slide
-        v-for="(product, index) in products.values"
+        v-for="(product, index) in PRODUCTS.values"
         :key="product.id"
         :product="product"
       />
@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { watch, ref, reactive, computed } from "vue";
+import { watch, ref, reactive, computed, onMounted } from "vue";
 import Slide from "../components/v-catalog-slide.vue";
 import { useQuery, provideApolloClient } from "@vue/apollo-composable";
 import gql from "graphql-tag";
@@ -60,11 +60,13 @@ export default {
     const store = useStore();
     store.dispatch("GET_PRODUCTS");
     const PRODUCTS = reactive([]);
-    PRODUCTS.values = computed(() => store.getters.PRODUCTS);
-    console.log(PRODUCTS.values);
     const products = reactive([]);
     const productsReserve = reactive([]);
     const model = ref(["Все товары"]);
+
+    onMounted(() => {
+      PRODUCTS.values = computed(() => store.getters.PRODUCTS);
+    });
 
     watch(model, () => {
       switch (model.value) {
@@ -91,31 +93,31 @@ export default {
       return products;
     });
 
-    const fetching = async () => {
-      try {
-        const { result, loading, error } = await useQuery(
-          gql`
-            query MyQuery {
-              products {
-                category
-                discount
-                gender
-                name
-                oldprice
-                todayprice
-                url
-              }
-            }
-          `
-        );
-        productsReserve.values = result?.value?.products;
-        products.values = result?.value?.products;
-      } catch (e) {
-        console.log(e);
-      }
-      return products, productsReserve;
-    };
-    fetching();
+    // const fetching = async () => {
+    //   try {
+    //     const { result, loading, error } = await useQuery(
+    //       gql`
+    //         query MyQuery {
+    //           products {
+    //             category
+    //             discount
+    //             gender
+    //             name
+    //             oldprice
+    //             todayprice
+    //             url
+    //           }
+    //         }
+    //       `
+    //     );
+    //     productsReserve.values = result?.value?.products;
+    //     products.values = result?.value?.products;
+    //   } catch (e) {
+    //     console.log(e);
+    //   }
+    //   return products, productsReserve;
+    // };
+    // fetching();
 
     const sendProdToCart = function (index) {
       const apolloClient = new ApolloClient(getClientOptions());
@@ -156,13 +158,13 @@ export default {
         `,
         () => ({
           variables: {
-            category: productsReserve.values[index].category,
-            discount: productsReserve.values[index].discount,
-            gender: productsReserve.values[index].gender,
-            name: productsReserve.values[index].name,
-            oldprice: productsReserve.values[index].oldprice,
-            todayprice: productsReserve.values[index].todayprice,
-            url: productsReserve.values[index].url,
+            category: PRODUCTS.values[index].category,
+            discount: PRODUCTS.values[index].discount,
+            gender: PRODUCTS.values[index].gender,
+            name: PRODUCTS.values[index].name,
+            oldprice: PRODUCTS.values[index].oldprice,
+            todayprice: PRODUCTS.values[index].todayprice,
+            url: PRODUCTS.values[index].url,
           },
         })
       );
