@@ -24,7 +24,6 @@ import { getClientOptions } from "src/apollo/index";
 
 export const GET_PRODUCTS = ({ commit }) => {
 	const fetching = async () => {
-		console.log("fetching");
 		try {
 			const { result, loading, error } = await useQuery(
 				gql`
@@ -42,7 +41,7 @@ export const GET_PRODUCTS = ({ commit }) => {
 	       `
 			);
 			commit("setProducts", result?.value?.products)
-			console.log("!!!!!!!!!!!", result?.value);
+			commit("setProductsFilter", result?.value?.products)
 		} catch (e) {
 			console.log("Ошибка:", e);
 		}

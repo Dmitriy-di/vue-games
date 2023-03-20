@@ -34,7 +34,7 @@
     </div>
     <div class="catalog__wrap">
       <Slide
-        v-for="(product, index) in PRODUCTS.values"
+        v-for="(product, index) in PRODUCTS_FILTER.values"
         :key="product.id"
         :product="product"
       />
@@ -60,37 +60,37 @@ export default {
     const store = useStore();
     store.dispatch("GET_PRODUCTS");
     const PRODUCTS = reactive([]);
-    const products = reactive([]);
-    const productsReserve = reactive([]);
+    const PRODUCTS_FILTER = reactive([]);
     const model = ref(["Все товары"]);
 
     onMounted(() => {
       PRODUCTS.values = computed(() => store.getters.PRODUCTS);
+      PRODUCTS_FILTER.values = store.getters.PRODUCTS_FILTER;
     });
 
     watch(model, () => {
       switch (model.value) {
         case "Все товары":
-          products.values = productsReserve.values;
+          PRODUCTS_FILTER.values = PRODUCTS.values;
           break;
         case "Мужская одежда":
-          products.values = productsReserve.values.filter(
+          PRODUCTS_FILTER.values = PRODUCTS.values.filter(
             (p) => p.gender == true
           );
           break;
         case "Женская одежда":
-          products.values = productsReserve.values.filter(
+          PRODUCTS_FILTER.values = PRODUCTS.values.filter(
             (p) => p.gender == false
           );
           break;
         case "По цене":
-          products.values = productsReserve.values.filter;
-          products.values.sort((a, b) =>
+          PRODUCTS_FILTER.values = PRODUCTS.values.filter;
+          PRODUCTS_FILTER.values.sort((a, b) =>
             a.todayprice > b.todayprice ? 1 : -1
           );
           break;
       }
-      return products;
+      return PRODUCTS_FILTER;
     });
 
     // const fetching = async () => {
@@ -171,7 +171,7 @@ export default {
       mutate();
     };
     return {
-      products,
+      PRODUCTS_FILTER,
       model,
       sendProdToCart,
       PRODUCTS,
