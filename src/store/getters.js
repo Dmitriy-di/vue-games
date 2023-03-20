@@ -10,3 +10,7 @@ export const PRODUCTS_FILTER = (state) => {
 export const CART_PRODUCTS = (state) => {
 	return state.cart
 }
+
+export const COUNT_CART_PRODUCTS = (state) => {
+	return state.cart
+}

@@ -6,14 +6,13 @@
       v-model="productAll"
       v-for="product in CART_PRODUCTS.values"
       :key="product.id"
-      :product="product"
     />
     <CartForm />
     <div class="registration-body__result">
       <div class="registration-body__total">
         Итого: <span> {{ TOTALSUM }} ₽</span>
       </div>
-      <div class="registration-body__issue" @click="a">Оформить заказ</div>
+      <div class="registration-body__issue">Оформить заказ</div>
     </div>
   </div>
 </template>
@@ -21,9 +20,7 @@
 <script>
 import CartForm from "../components/v-cart-form.vue";
 import CartItem from "../components/v-cart-item.vue";
-import { reactive, computed, onMounted } from "vue";
-import { useQuery } from "@vue/apollo-composable";
-import gql from "graphql-tag";
+import { reactive, computed, onMounted, watch } from "vue";
 import { useStore } from "vuex";
 
 export default {
@@ -34,7 +31,14 @@ export default {
   setup() {
     const store = useStore();
     const CART_PRODUCTS = reactive([]);
+    const count_cart_products = reactive([]);
+    // const prodObjs = reactive({});
     store.dispatch("GET_CART_PRODUCTS");
+
+    // watch(prodObjs, () => console.log(prodObjs));
+    // count_cart_products.values = computed(
+    //   () => store.getters.COUNT_CART_PRODUCTS
+    // );
 
     onMounted(() => {
       CART_PRODUCTS.values = computed(() => store.getters.CART_PRODUCTS);
@@ -42,6 +46,7 @@ export default {
 
     return {
       CART_PRODUCTS,
+      // prodObjs,
     };
   },
 };

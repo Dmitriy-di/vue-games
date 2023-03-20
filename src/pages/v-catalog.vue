@@ -45,7 +45,7 @@
 <script>
 import { watch, ref, reactive, computed, onMounted } from "vue";
 import Slide from "../components/v-catalog-slide.vue";
-import { useQuery, provideApolloClient } from "@vue/apollo-composable";
+import { provideApolloClient } from "@vue/apollo-composable";
 import gql from "graphql-tag";
 import { useMutation } from "@vue/apollo-composable";
 import { ApolloClient } from "@apollo/client/core";

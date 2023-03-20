@@ -66,22 +66,28 @@ export default {
     //   },
     // },
   },
-  setup(props, context) {
+  emits: ["productObj"],
+  setup(props, { emit }) {
     const store = useStore();
-    const prodObj = ref([]);
+    const prodObjs = ref([]);
     const quantityProd = ref(1);
+    // PRODUCTS.values = computed(() => store.getters.PRODUCTS);
 
     const addToCartItem = function (product) {
-      prodObj.value.push(product.id);
+      // prodObj.value.push(product.id);
       quantityProd.value += 1;
-      context.emit("prodObj", prodObj.value);
+      p = product.todayprice;
+      const obj = { p: quantityProd.value };
+      // emit("productObj", obj);
     };
 
     const deleteCartItem = function (product) {
-      prodObj.value.push(product.id);
+      // prodObj.value.push(product.id);
       if (quantityProd.value > 0) {
         quantityProd.value -= 1;
-        context.emit("prodObj", prodObj.value);
+        p = product.todayprice;
+        const obj = { p: quantityProd.value };
+        // emit("productObj", obj);
       }
     };
 
@@ -89,7 +95,7 @@ export default {
       addToCartItem,
       deleteCartItem,
       quantityProd,
-      prodObj,
+      prodObjs,
     };
   },
 };

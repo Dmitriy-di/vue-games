@@ -7,6 +7,7 @@ const state = {
   cart: [],
   products: [],
   productsFilter: [],
+  count_cart_products: [1, 1, 1, 1, 1, 1, 1, 1, 1],
 }
 
 const store = createStore({

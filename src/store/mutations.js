@@ -13,3 +13,7 @@ export const setProductsFilter = (state, productsFilter) => {
 export const setCartProducts = (state, CartProducts) => {
 	state.cart = CartProducts
 }
+
+export const setCountCartProducts = (state, index, count) => {
+	state.cart[index] = count
+}
