@@ -31,6 +31,7 @@ export default {
     CartForm,
     CartItem,
   },
+
   setup() {
     const products = reactive([]);
     const productAll = reactive([]);
