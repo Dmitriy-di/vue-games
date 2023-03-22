@@ -85,18 +85,18 @@ import { ref } from "vue";
 
 export default {
   props: {
-    male: {
-      type: String,
-      default() {
-        return {};
-      },
-    },
-    famale: {
-      type: String,
-      default() {
-        return {};
-      },
-    },
+    // male: {
+    //   type: String,
+    //   default() {
+    //     return {};
+    //   },
+    // },
+    // famale: {
+    //   type: String,
+    //   default() {
+    //     return {};
+    //   },
+    // },
   },
   emits: ["male", "female"],
   setup(props) {

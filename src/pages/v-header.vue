@@ -7,29 +7,45 @@
             <img src="https://cdn.quasar.dev/logo-v2/svg/logo-mono-white.svg" />
           </q-avatar> -->
         LOGO
-        <Registration />
+        <div id="user-button">32</div>
+        <!-- <Registration /> -->
       </q-toolbar-title>
     </q-toolbar>
     <q-toolbar class="header__bottom">
       <div class="bottom-header__container">
         <div class="bottom-header__column">
           <ul class="bottom-header__actions actions-header">
-            <li @click="showLogIn = true">
-              <a href="#" class="actions-header__item actions-header_login"><span>Вход</span></a>
-            </li>
-            <li @click="showSignUp = true">
-              <a href="#" class="actions-header__item actions-header_reg"><span>Регистрация</span></a>
+            <li>
+              <div id="auth-links">
+                <button
+                  onclick="Clerk.openSignIn()"
+                  class="actions-header__item actions-header_login"
+                >
+                  <span>Вход</span>
+                </button>
+                <button
+                  onclick="Clerk.openSignUp()"
+                  class="actions-header__item actions-header_reg"
+                >
+                  <span>Регистрация</span>
+                </button>
+              </div>
             </li>
             <li>
-              <a href="mailto:sport@gmail.com"
-                class="actions-header__item actions-header_email"><span>sport@gmail.com</span></a>
+              <a
+                href="mailto:sport@gmail.com"
+                class="actions-header__item actions-header_email"
+                ><span>sport@gmail.com</span></a
+              >
             </li>
           </ul>
         </div>
         <div class="bottom-header__column">
           <div class="bottom-header__info info-header">
             <div class="info-header__column">
-              <a href="#" class="info-header__collback"><span>Обратный звонок</span></a>
+              <a href="#" class="info-header__collback"
+                ><span>Обратный звонок</span></a
+              >
             </div>
             <div class="info-header__column">
               <div class="info-header__schedul">
@@ -38,7 +54,8 @@
               </div>
             </div>
             <div class="info-header__column info-header__column_orange">
-              <i class="v-catalog__icons material-icons basket">shopping_basket
+              <i class="v-catalog__icons material-icons basket"
+                >shopping_basket
               </i>
               <span class="info-header__cart">12</span>
             </div>
@@ -46,21 +63,65 @@
         </div>
       </div>
     </q-toolbar>
-    <Login v-model="showLogIn" />
-    <Registration v-model="showSignUp" />
+    <!-- <Login v-model="showLogIn" />
+    <Registration v-model="showSignUp" /> -->
   </div>
 </template>
 
 <script>
-
 import { ref } from "vue";
 import Registration from "../components/v-registration.vue";
-import Login from "../components/v-login.vue"
+import Login from "../components/v-login.vue";
+
+//import Clerk from "@clerk/clerk-js";
+const publishableKey =
+  "pk_test_ZWxlY3RyaWMtdGFoci00OS5jbGVyay5hY2NvdW50cy5kZXYk"; // <- Add Publishable Key here
+
+const startClerk = async () => {
+  const Clerk = window.Clerk;
+
+  try {
+    // Load Clerk environment and session if available
+    await Clerk.load();
+
+    const userButton = document.getElementById("user-button");
+    const authLinks = document.getElementById("auth-links");
+    console.log(userButton);
+    console.log(authLinks);
+
+    Clerk.addListener(({ user }) => {
+      // Display links conditionally based on user state
+      authLinks.style.display = user ? "none" : "flex";
+    });
+
+    if (Clerk.user) {
+      // Mount user button component
+      Clerk.mountUserButton(userButton);
+      userButton.style.margin = "auto";
+      //==============================================
+    }
+  } catch (err) {
+    console.error("Error starting Clerk: ", err);
+  }
+};
+
+(() => {
+  const script = document.createElement("script");
+  script.setAttribute("data-clerk-publishable-key", publishableKey);
+  script.async = true;
+  script.src = `https://cdn.jsdelivr.net/npm/@clerk/clerk-js@latest/dist/clerk.browser.js`;
+  script.crossOrigin = "anonymous";
+  script.addEventListener("load", startClerk);
+  script.addEventListener("error", () => {
+    document.getElementById("no-frontend-api-warning").hidden = false;
+  });
+  document.body.appendChild(script);
+})();
 
 export default {
   components: {
     Registration,
-    Login
+    Login,
   },
 
   props: {},
@@ -79,6 +140,9 @@ export default {
 </script>
 
 <style lang="scss">
+#auth-links {
+  display: flex;
+}
 .header {
   &__title {
     text-align: center;
@@ -98,7 +162,8 @@ export default {
     }
   }
 
-  &__column {}
+  &__column {
+  }
 }
 
 .actions-header {
@@ -116,9 +181,14 @@ export default {
     }
   }
 
-  &_login {}
+  &_login {
+    margin: 0 20px 0 0;
+    background-color: transparent;
+  }
 
-  &_reg {}
+  &_reg {
+    background-color: transparent;
+  }
 
   &_email {
     span {
@@ -272,4 +342,6 @@ export default {
   }
 }
 
-.basket {}</style>
+.basket {
+}
+</style>
