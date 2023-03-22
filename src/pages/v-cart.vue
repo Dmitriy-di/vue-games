@@ -3,10 +3,10 @@
     <div class="order-body__title">Ваш заказ</div>
 
     <CartItem
-      v-model="productAll"
       v-for="product in CART_PRODUCTS.values"
       :key="product.id"
       :product="product"
+      @productPrice="productPrice"
     />
     <CartForm />
     <div class="registration-body__result">
@@ -21,7 +21,7 @@
 <script>
 import CartForm from "../components/v-cart-form.vue";
 import CartItem from "../components/v-cart-item.vue";
-import { reactive, computed, watch } from "vue";
+import { reactive, computed, ref } from "vue";
 import { useStore } from "vuex";
 
 export default {
@@ -34,19 +34,21 @@ export default {
     store.dispatch("GET_CART_PRODUCTS");
 
     const CART_PRODUCTS = reactive([]);
-    const count_cart_products = reactive([]);
-    // const prodObjs = reactive({});
-
-    // watch(prodObjs, () => console.log(prodObjs));
-    // count_cart_products.values = computed(
-    //   () => store.getters.COUNT_CART_PRODUCTS
-    // );
 
     CART_PRODUCTS.values = computed(() => store.getters.CART_PRODUCTS);
+    const TOTALSUM = ref(
+      CART_PRODUCTS.values.reduce((a, b) => a + b.todayprice, 0)
+    );
 
+    const productPrice = (price) => {
+      console.log("price", price);
+      TOTALSUM.value += price;
+    };
     return {
       CART_PRODUCTS,
       // prodObjs,
+      productPrice,
+      TOTALSUM,
     };
   },
 };

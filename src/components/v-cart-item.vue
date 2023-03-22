@@ -66,29 +66,25 @@ export default {
     //   },
     // },
   },
-  emits: ["productObj"],
+  emits: ["productPrice"],
   setup(props, { emit }) {
-    const store = useStore();
     const prodObjs = ref([]);
     const quantityProd = ref(1);
     // PRODUCTS.values = computed(() => store.getters.PRODUCTS);
 
     const addToCartItem = function (product) {
-      prodObj.value.push(product.id);
+      // prodObj.value.push(product.id);
       quantityProd.value += 1;
-      p = product.todayprice;
-      console.log(p);
-      // const obj = { p: quantityProd.value };
-      // emit("productObj", obj);
+      const priceAdd = product.todayprice;
+      emit("productPrice", priceAdd);
     };
 
     const deleteCartItem = function (product) {
       // prodObj.value.push(product.id);
       if (quantityProd.value > 0) {
         quantityProd.value -= 1;
-        p = product.todayprice;
-        const obj = { p: quantityProd.value };
-        // emit("productObj", obj);
+        const priceSubtract = -product.todayprice;
+        emit("productPrice", priceSubtract);
       }
     };
 
