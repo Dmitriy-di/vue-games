@@ -72,7 +72,7 @@
         </div>
         <div class="content-category__btn">
           <router-link to="/catalog"
-            ><button @click="clickFemale">подробнее</button></router-link
+            ><button @click="clickFemale">подробнее </button></router-link
           >
         </div>
       </div>

@@ -77,7 +77,7 @@ export default {
           break;
         case "По цене":
           products.values = productsReserve.values.filter;
-          products.values.sort((a, b) =>
+          products.sort((a, b) =>
             a.todayprice > b.todayprice ? 1 : -1
           );
           break;
