@@ -9,6 +9,7 @@ const state = {
   productsFilter: [],
   loadingCart: {},
   loadingCatalog: {},
+  refetchCart: {},
 }
 
 const store = createStore({

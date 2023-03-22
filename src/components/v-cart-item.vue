@@ -17,7 +17,10 @@
             <div class="actions-product__quantity quantity">
               <button
                 class="quantity__button quantity__button_left"
-                @click="deleteCartItem(product)"
+                @click="
+                  substractCartItem(product);
+                  deleteCartItem(product);
+                "
               >
                 -
               </button>
@@ -49,7 +52,11 @@
 
 <script>
 import { ref } from "vue";
-import { useStore } from "vuex";
+import { provideApolloClient } from "@vue/apollo-composable";
+import gql from "graphql-tag";
+import { useMutation } from "@vue/apollo-composable";
+import { ApolloClient } from "@apollo/client/core";
+import { getClientOptions } from "src/apollo/index";
 
 export default {
   props: {
@@ -79,7 +86,7 @@ export default {
       emit("productPrice", priceAdd);
     };
 
-    const deleteCartItem = function (product) {
+    const substractCartItem = function (product) {
       // prodObj.value.push(product.id);
       if (quantityProd.value > 0) {
         quantityProd.value -= 1;
@@ -88,17 +95,33 @@ export default {
       }
     };
 
+    const deleteCartItem = function (product) {
+      // console.log(product.id);
+      const apolloClient = new ApolloClient(getClientOptions());
+
+      provideApolloClient(apolloClient);
+      const { mutate } = useMutation(
+        gql`
+          mutation MyMutation {
+            delete_cartItems(where: { id: { _eq: 166) } }) {
+              returning {
+                category
+              }
+            }
+          }
+        `
+      );
+      mutate();
+    };
+
     return {
       addToCartItem,
-      deleteCartItem,
+      substractCartItem,
       quantityProd,
       prodObjs,
+      deleteCartItem,
     };
   },
-
-
-
-  
 };
 </script>
 

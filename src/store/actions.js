@@ -49,10 +49,9 @@ export const GET_PRODUCTS = ({ commit }) => {
 }
 
 export const GET_CART_PRODUCTS = ({ commit }) => {
-	// console.log("fetching start");
 	const fetching = async () => {
 		try {
-			const { result, loading, error } = await useQuery(gql`
+			const { result, loading, error, refetch } = await useQuery(gql`
 			query MyQuery {
 			  cartItems {
 				 category
@@ -65,14 +64,15 @@ export const GET_CART_PRODUCTS = ({ commit }) => {
 				 id
 			  }
 			}
-		 `
+		 `, null, {
+				pollInterval: 1000,
+			}
 			);
-			commit("setCartProducts", { CartProducts: result?.value?.cartItems, loading: loading })
-			// console.log(result?.value?.cartItems);
+			console.log(refetch);
+			commit("setCartProducts", { CartProducts: result?.value?.cartItems, loading: loading, refetch: refetch })
 		} catch (e) {
 			console.log("Ошибка:", e);
 		}
-		// console.log("fetching end");
 	};
 	fetching();
 } 

@@ -22,3 +22,7 @@ export const LOADING_CART = (state) => {
 export const LOADING_CATALOG = (state) => {
 	return state.loadingCatalog
 }
+
+export const REFETCH = (state) => {
+	return state.refetchCart
+}
