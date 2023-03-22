@@ -259,12 +259,13 @@ export default {
   }
 
   &__btn {
-    margin: 12px;
+    margin: 14px 150px ;
     padding:18px;
     text-align: center;
     font-size: 24px;
     border-radius: 24px;
     background: rgb(240,240,240);
+    
     
 
   }
