@@ -6,6 +6,7 @@
       v-model="productAll"
       v-for="product in CART_PRODUCTS.values"
       :key="product.id"
+      :product="product"
     />
     <CartForm />
     <div class="registration-body__result">
@@ -20,7 +21,7 @@
 <script>
 import CartForm from "../components/v-cart-form.vue";
 import CartItem from "../components/v-cart-item.vue";
-import { reactive, computed, onMounted, watch } from "vue";
+import { reactive, computed, watch } from "vue";
 import { useStore } from "vuex";
 
 export default {
@@ -30,19 +31,18 @@ export default {
   },
   setup() {
     const store = useStore();
+    store.dispatch("GET_CART_PRODUCTS");
+
     const CART_PRODUCTS = reactive([]);
     const count_cart_products = reactive([]);
     // const prodObjs = reactive({});
-    store.dispatch("GET_CART_PRODUCTS");
 
     // watch(prodObjs, () => console.log(prodObjs));
     // count_cart_products.values = computed(
     //   () => store.getters.COUNT_CART_PRODUCTS
     // );
 
-    onMounted(() => {
-      CART_PRODUCTS.values = computed(() => store.getters.CART_PRODUCTS);
-    });
+    CART_PRODUCTS.values = computed(() => store.getters.CART_PRODUCTS);
 
     return {
       CART_PRODUCTS,

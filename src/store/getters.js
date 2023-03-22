@@ -12,5 +12,5 @@ export const CART_PRODUCTS = (state) => {
 }
 
 export const COUNT_CART_PRODUCTS = (state) => {
-	return state.cart
+	return state.count_cart_products
 }

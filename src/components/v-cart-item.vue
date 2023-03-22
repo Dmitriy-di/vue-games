@@ -74,10 +74,11 @@ export default {
     // PRODUCTS.values = computed(() => store.getters.PRODUCTS);
 
     const addToCartItem = function (product) {
-      // prodObj.value.push(product.id);
+      prodObj.value.push(product.id);
       quantityProd.value += 1;
       p = product.todayprice;
-      const obj = { p: quantityProd.value };
+      console.log(p);
+      // const obj = { p: quantityProd.value };
       // emit("productObj", obj);
     };
 

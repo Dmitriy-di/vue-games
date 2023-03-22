@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import { watch, ref, reactive, computed, onMounted } from "vue";
+import { watch, ref, reactive, computed } from "vue";
 import Slide from "../components/v-catalog-slide.vue";
 import { provideApolloClient } from "@vue/apollo-composable";
 import gql from "graphql-tag";
@@ -63,10 +63,8 @@ export default {
     const PRODUCTS_FILTER = reactive([]);
     const model = ref(["Все товары"]);
 
-    onMounted(() => {
-      PRODUCTS.values = computed(() => store.getters.PRODUCTS);
-      PRODUCTS_FILTER.values = store.getters.PRODUCTS_FILTER;
-    });
+    PRODUCTS.values = computed(() => store.getters.PRODUCTS);
+    PRODUCTS_FILTER.values = store.getters.PRODUCTS_FILTER;
 
     watch(model, () => {
       switch (model.value) {

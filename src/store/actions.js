@@ -53,7 +53,7 @@ export const GET_CART_PRODUCTS = ({ commit }) => {
 	const fetching = async () => {
 		console.log("fetching");
 		try {
-			const { result, loading, error } = useQuery(gql`
+			const { result, loading, error } = await useQuery(gql`
 			query MyQuery {
 			  cartItems {
 				 category
