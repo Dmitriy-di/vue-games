@@ -2,6 +2,16 @@
   <div>
     <div class="order-body__title">Ваш заказ</div>
 
+    <div v-if="loading">
+      <q-circular-progress
+        indeterminate
+        rounded
+        size="50px"
+        color="lime"
+        class="q-ma-md"
+      />
+    </div>
+
     <CartItem
       v-for="product in CART_PRODUCTS.values"
       :key="product.id"
@@ -35,8 +45,10 @@ export default {
     store.dispatch("GET_CART_PRODUCTS");
 
     const CART_PRODUCTS = reactive([]);
-
     CART_PRODUCTS.values = computed(() => store.getters.CART_PRODUCTS);
+
+    const loading = computed(() => store.getters.LOADING_CART);
+
     const TOTALSUM = ref(
       CART_PRODUCTS.values
         ? CART_PRODUCTS.values.reduce((a, b) => a + b.todayprice, 0)
@@ -46,7 +58,9 @@ export default {
     const productPrice = (price) => {
       TOTALSUM.value += price;
     };
+
     return {
+      loading,
       CART_PRODUCTS,
       // prodObjs,
       productPrice,

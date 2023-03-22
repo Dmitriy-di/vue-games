@@ -33,6 +33,15 @@
       </div>
     </div>
     <div class="catalog__wrap">
+      <div v-if="loading">
+        <q-circular-progress
+          indeterminate
+          rounded
+          size="50px"
+          color="lime"
+          class="q-ma-md"
+        />
+      </div>
       <Slide
         v-for="(product, index) in PRODUCTS_FILTER.values"
         :key="product.id"
@@ -62,7 +71,7 @@ export default {
     const PRODUCTS = reactive([]);
     const PRODUCTS_FILTER = reactive([]);
     const model = ref(["Все товары"]);
-
+    const loading = computed(() => store.getters.LOADING_CATALOG);
     PRODUCTS.values = computed(() => store.getters.PRODUCTS);
     PRODUCTS_FILTER.values = store.getters.PRODUCTS_FILTER;
 
@@ -82,7 +91,6 @@ export default {
           );
           break;
         case "По цене":
-          PRODUCTS_FILTER.values = PRODUCTS.values.filter;
           PRODUCTS_FILTER.values.sort((a, b) =>
             a.todayprice > b.todayprice ? 1 : -1
           );
@@ -90,32 +98,6 @@ export default {
       }
       return PRODUCTS_FILTER;
     });
-
-    // const fetching = async () => {
-    //   try {
-    //     const { result, loading, error } = await useQuery(
-    //       gql`
-    //         query MyQuery {
-    //           products {
-    //             category
-    //             discount
-    //             gender
-    //             name
-    //             oldprice
-    //             todayprice
-    //             url
-    //           }
-    //         }
-    //       `
-    //     );
-    //     productsReserve.values = result?.value?.products;
-    //     products.values = result?.value?.products;
-    //   } catch (e) {
-    //     console.log(e);
-    //   }
-    //   return products, productsReserve;
-    // };
-    // fetching();
 
     const sendProdToCart = function (index) {
       const apolloClient = new ApolloClient(getClientOptions());
@@ -169,6 +151,7 @@ export default {
       mutate();
     };
     return {
+      loading,
       PRODUCTS_FILTER,
       model,
       sendProdToCart,

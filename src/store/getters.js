@@ -14,3 +14,11 @@ export const CART_PRODUCTS = (state) => {
 export const COUNT_CART_PRODUCTS = (state) => {
 	return state.count_cart_products
 }
+
+export const LOADING_CART = (state) => {
+	return state.loadingCart
+}
+
+export const LOADING_CATALOG = (state) => {
+	return state.loadingCatalog
+}

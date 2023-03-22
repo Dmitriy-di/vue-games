@@ -72,7 +72,7 @@
         </div>
         <div class="content-category__btn">
           <router-link to="/catalog"
-            ><button @click="clickFemale">подробнее </button></router-link
+            ><button @click="clickFemale">подробнее</button></router-link
           >
         </div>
       </div>
@@ -204,8 +204,6 @@ export default {
     color: #ffffff;
     margin: 0 0 24px 0;
     padding: 0 29px 0 0;
-    background: url("/Mine/Project/Sportshop/img/imgSlider/rouble.png") right
-      center no-repeat;
     @media (max-width: $md3+px) {
       font-size: 25px;
       background-size: 15px;
@@ -252,22 +250,19 @@ export default {
   &__text {
     position: rative;
     color: #858080;
-    font-size:150%;
+    font-size: 150%;
     text-transform: uppercase;
     font-weight: bold;
     text-align: center;
   }
 
   &__btn {
-    margin: 14px 150px ;
-    padding:18px;
+    margin: 14px 150px;
+    padding: 18px;
     text-align: center;
     font-size: 24px;
     border-radius: 24px;
-    background: rgb(240,240,240);
-    
-    
-
+    background: rgb(240, 240, 240);
   }
 }
 
@@ -276,9 +271,6 @@ export default {
     width: 100%;
     flex-direction: column;
     align-items: center;
-  } 
+  }
 }
-
-
-
 </style>

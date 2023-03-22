@@ -40,8 +40,7 @@ export const GET_PRODUCTS = ({ commit }) => {
 	         }
 	       `
 			);
-			commit("setProducts", result?.value?.products)
-			commit("setProductsFilter", result?.value?.products)
+			commit("setProducts", { products: result?.value?.products, productsFilter: result?.value?.products, loading: loading })
 		} catch (e) {
 			console.log("Ошибка:", e);
 		}
@@ -50,8 +49,8 @@ export const GET_PRODUCTS = ({ commit }) => {
 }
 
 export const GET_CART_PRODUCTS = ({ commit }) => {
+	// console.log("fetching start");
 	const fetching = async () => {
-		console.log("fetching");
 		try {
 			const { result, loading, error } = await useQuery(gql`
 			query MyQuery {
@@ -66,12 +65,14 @@ export const GET_CART_PRODUCTS = ({ commit }) => {
 				 id
 			  }
 			}
-		 `);
-			commit("setCartProducts", result?.value?.cartItems)
-			console.log(result?.value?.cartItems);
+		 `
+			);
+			commit("setCartProducts", { CartProducts: result?.value?.cartItems, loading: loading })
+			// console.log(result?.value?.cartItems);
 		} catch (e) {
 			console.log("Ошибка:", e);
 		}
+		// console.log("fetching end");
 	};
 	fetching();
 } 

@@ -32,7 +32,6 @@
 
     <q-page-container>
       <router-view class="q-ma-md" />
-      <Registration v-model="signUp" />
     </q-page-container>
 
     <q-footer elevated class="bg-grey-8 text-white">

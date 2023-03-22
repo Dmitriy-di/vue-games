@@ -3,17 +3,13 @@
 // 	state.history.push('increment')
 //  }
 
-export const setProducts = (state, products) => {
+export const setProducts = (state, { products, productsFilter, loading }) => {
 	state.products = products
-}
-export const setProductsFilter = (state, productsFilter) => {
-	state.products = productsFilter
+	state.productsFilter = productsFilter
+	state.loadingCatalog = loading
 }
 
-export const setCartProducts = (state, CartProducts) => {
+export const setCartProducts = (state, { CartProducts, loading }) => {
 	state.cart = CartProducts
-}
-
-export const setCountCartProducts = (state, index, count) => {
-	state.cart[index] = count
+	state.loadingCart = loading
 }
