@@ -50,26 +50,31 @@
       </div>
     </div>
 
-    <div class="content-category__panel-options">
+    <div class="content-category">
       <div class="content-category__men">
         <div class="content-category__text">
           <p>Мужское</p>
         </div>
         <img src="~assets/Main/men.jpg" alt="Мужское" />
-        <div>
+        <div class="content-category__btn">
           <router-link to="/catalog"
             ><button @click="clickMale">подробнее</button></router-link
           >
         </div>
       </div>
       <div class="content-category_women">
-        <p>Женское</p>
-        <div>
-          <img src="~assets/Main/women.jpg" alt="Мужское" />
+        <div class="content-category__text">
+          <p>Женское</p>
         </div>
-        <router-link to="/catalog"
-          ><button @click="clickFemale">подробнее</button></router-link
-        >
+
+        <div>
+          <img src="~assets/Main/women.jpg" alt="Женское" />
+        </div>
+        <div class="content-category__btn">
+          <router-link to="/catalog"
+            ><button @click="clickFemale">подробнее </button></router-link
+          >
+        </div>
       </div>
     </div>
   </div>
@@ -131,8 +136,8 @@ export default {
 }
 .content-slider {
   position: relative;
-
   padding: 21px 36px 58px 21px;
+
   &__title {
     font-family: Roboto-Black;
     line-height: 1.2;
@@ -239,11 +244,41 @@ export default {
   color: rgb(0, 0, 0);
   display: flex;
   justify-content: space-between;
-  &__men {
-    object-fit: cover;
-  }
+  box-shadow: 5px 20px 50px rgba(16, 112, 177, 0.2);
+  border-radius: 10px;
+  box-sizing: border-box;
+  gap: 16px;
+
   &__text {
-    position: relative;
+    position: rative;
+    color: #858080;
+    font-size:150%;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center;
+  }
+
+  &__btn {
+    margin: 14px 150px ;
+    padding:18px;
+    text-align: center;
+    font-size: 24px;
+    border-radius: 24px;
+    background: rgb(240,240,240);
+    
+    
+
   }
 }
+
+@media (max-width: 1600px) {
+  .content-category {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+  } 
+}
+
+
+
 </style>

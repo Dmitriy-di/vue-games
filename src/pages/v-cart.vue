@@ -29,6 +29,7 @@ export default {
     CartForm,
     CartItem,
   },
+
   setup() {
     const store = useStore();
     store.dispatch("GET_CART_PRODUCTS");
@@ -37,11 +38,12 @@ export default {
 
     CART_PRODUCTS.values = computed(() => store.getters.CART_PRODUCTS);
     const TOTALSUM = ref(
-      CART_PRODUCTS.values.reduce((a, b) => a + b.todayprice, 0)
+      CART_PRODUCTS.values
+        ? CART_PRODUCTS.values.reduce((a, b) => a + b.todayprice, 0)
+        : ""
     );
 
     const productPrice = (price) => {
-      console.log("price", price);
       TOTALSUM.value += price;
     };
     return {
