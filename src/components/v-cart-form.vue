@@ -93,12 +93,14 @@ import gql from "graphql-tag";
 import { useMutation } from "@vue/apollo-composable";
 import { ApolloClient } from "@apollo/client/core";
 import { getClientOptions } from "src/apollo/index";
+import { useQuasar } from "quasar";
 
 export default {
   setup() {
     // const getFormValues = function (e) {
     //   console.log(Array.from(e.target.elements));
     // };
+    const $q = useQuasar();
     const getFormValues = function (e) {
       const apolloClient = new ApolloClient(getClientOptions());
 
@@ -158,8 +160,16 @@ export default {
           })
         );
         mutate();
+        $q.notify({
+          type: "positive",
+          message: "Отправлено",
+        });
       } else {
         console.log("Не все поля заполнены");
+        $q.notify({
+          type: "negative",
+          message: "Не все обязательные поля заполнены",
+        });
       }
     };
     return {
