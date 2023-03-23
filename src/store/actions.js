@@ -6,7 +6,7 @@ import { getClientOptions } from "src/apollo/index";
 export const GET_PRODUCTS = ({ commit }) => {
 	const fetching = async () => {
 		try {
-			const { result, loading, error } = await useQuery(
+			const { onResult } = useQuery(
 				gql`
 	         query MyQuery {
 	           products {
@@ -21,8 +21,9 @@ export const GET_PRODUCTS = ({ commit }) => {
 	         }
 	       `
 			);
-			commit("setProducts", { products: result?.value?.products, productsFilter: result?.value?.products, loading: loading })
-			console.log(result?.value?.products);
+			onResult(queryResult => {
+				commit("setProducts", { products: queryResult?.data?.products, productsFilter: queryResult?.data?.products, loading: queryResult.loading })
+			})
 		} catch (e) {
 			console.log("Ошибка:", e);
 		}
@@ -33,7 +34,7 @@ export const GET_PRODUCTS = ({ commit }) => {
 export const GET_CART_PRODUCTS = ({ commit }) => {
 	const fetching = async () => {
 		try {
-			const { result, loading, error, refetch } = await useQuery(gql`
+			const { onResult, refetch } = useQuery(gql`
 			query MyQuery {
 			  cartItems {
 				 category
@@ -50,7 +51,9 @@ export const GET_CART_PRODUCTS = ({ commit }) => {
 				pollInterval: 1000,
 			}
 			);
-			commit("setCartProducts", { CartProducts: result?.value?.cartItems, loading: loading, refetch: refetch })
+			onResult(queryResult => {
+				commit("setCartProducts", { CartProducts: queryResult?.data?.cartItems, loading: queryResult.loading, refetch: refetch })
+			})
 		} catch (e) {
 			console.log("Ошибка:", e);
 		}

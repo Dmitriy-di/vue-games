@@ -66,12 +66,6 @@ export default {
         return {};
       },
     },
-    // prodObj: {
-    //   type: Object,
-    //   default() {
-    //     [];
-    //   },
-    // },
   },
   emits: ["productPrice"],
   setup(props, { emit }) {
@@ -98,11 +92,13 @@ export default {
     const deleteCartItem = function (product) {
       // console.log(product.id);
       const apolloClient = new ApolloClient(getClientOptions());
-
       provideApolloClient(apolloClient);
+
       const { mutate } = useMutation(
         gql`
-          mutation MyMutation {
+          mutation MyMutation(
+              $adress: String!
+            ) {
             delete_cartItems(where: { id: { _eq: 166) } }) {
               returning {
                 category

@@ -33,7 +33,7 @@
           </div>
 
           <!-- <div class="hover-product__cart" @click="sendProdToCart(product); refetch()"> -->
-          <div class="hover-product__cart" @click="sendProdToCart(product);">
+          <div class="hover-product__cart" @click="sendProdToCart(product)">
             <q-item class="q-item-car-img" v-ripple>
                 <img src="../assets/Catalog/cart_orange.webp" alt="" />
             </q-item>
@@ -93,7 +93,7 @@ export default {
 
       provideApolloClient(apolloClient);
 
-      const { mutate: sendProduct } = useMutation(
+      const { mutate: sendProduct,  } = useMutation(
         gql`
           mutation MyMutation(
             $category: String!

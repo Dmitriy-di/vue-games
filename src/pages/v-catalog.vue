@@ -52,7 +52,7 @@
 </template>
 
 <script>
-import { watch, ref, reactive, computed, getCurrentInstance } from "vue";
+import { watch, ref, reactive, computed } from "vue";
 import Slide from "../components/v-catalog-slide.vue";
 import { provideApolloClient } from "@vue/apollo-composable";
 import gql from "graphql-tag";
@@ -73,16 +73,7 @@ export default {
     const PRODUCTS_FILTER = reactive([]);
     const loading = computed(() => store.getters.LOADING_CATALOG);
     PRODUCTS.values = computed(() => store.getters.PRODUCTS);
-    PRODUCTS_FILTER.values = store.getters.PRODUCTS_FILTER;
-
-    const instance = getCurrentInstance();
-    // const componentKey = ref(0);
-    watch(loading, () => {
-      setTimeout(() => {
-        console.log(PRODUCTS);
-        instance?.proxy?.$forceUpdate();
-      }, 3000);
-    });
+    PRODUCTS_FILTER.values = computed(() => store.getters.PRODUCTS);
 
     let model = ref("Все товары");
     const genderParam = useRouter().currentRoute.value.query.gender;

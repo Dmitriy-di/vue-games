@@ -94,13 +94,14 @@ import { useMutation } from "@vue/apollo-composable";
 import { ApolloClient } from "@apollo/client/core";
 import { getClientOptions } from "src/apollo/index";
 import { useQuasar } from "quasar";
+import { getCurrentInstance } from "vue";
 
 export default {
   setup() {
-    // const getFormValues = function (e) {
-    //   console.log(Array.from(e.target.elements));
-    // };
     const $q = useQuasar();
+
+    const instance = getCurrentInstance();
+
     const getFormValues = function (e) {
       const apolloClient = new ApolloClient(getClientOptions());
 

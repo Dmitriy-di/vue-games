@@ -30,7 +30,7 @@
 <script>
 import CartForm from "../components/v-cart-form.vue";
 import CartItem from "../components/v-cart-item.vue";
-import { reactive, computed, ref, watch } from "vue";
+import { reactive, computed, ref } from "vue";
 import { useStore } from "vuex";
 
 export default {
