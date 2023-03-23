@@ -17,10 +17,7 @@
             <div class="actions-product__quantity quantity">
               <button
                 class="quantity__button quantity__button_left"
-                @click="
-                  substractCartItem(product);
-                  deleteCartItem(product);
-                "
+                @click="substractCartItem(product)"
               >
                 -
               </button>
@@ -71,41 +68,39 @@ export default {
   setup(props, { emit }) {
     const prodObjs = ref([]);
     const quantityProd = ref(1);
-    // PRODUCTS.values = computed(() => store.getters.PRODUCTS);
 
     const addToCartItem = function (product) {
-      // prodObj.value.push(product.id);
       quantityProd.value += 1;
       const priceAdd = product.todayprice;
       emit("productPrice", priceAdd);
     };
 
     const substractCartItem = function (product) {
-      // prodObj.value.push(product.id);
-      if (quantityProd.value > 0) {
+      if (quantityProd.value > 1) {
         quantityProd.value -= 1;
-        const priceSubtract = -product.todayprice;
-        emit("productPrice", priceSubtract);
+        emit("productPrice", -product.todayprice);
+      } else {
+        emit("productPrice", -product.todayprice);
+        deleteCartItem(product);
       }
     };
 
     const deleteCartItem = function (product) {
-      // console.log(product.id);
       const apolloClient = new ApolloClient(getClientOptions());
       provideApolloClient(apolloClient);
-
       const { mutate } = useMutation(
         gql`
-          mutation MyMutation(
-              $adress: String!
-            ) {
-            delete_cartItems(where: { id: { _eq: 166) } }) {
-              returning {
-                category
-              }
+          mutation MyMutation($id_user: Int!) {
+            delete_cartItems_by_pk(id: $id_user) {
+              id
             }
           }
-        `
+        `,
+        () => ({
+          variables: {
+            id_user: product.id,
+          },
+        })
       );
       mutate();
     };

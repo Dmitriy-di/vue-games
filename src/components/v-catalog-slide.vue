@@ -33,7 +33,7 @@
           </div>
 
           <!-- <div class="hover-product__cart" @click="sendProdToCart(product); refetch()"> -->
-          <div class="hover-product__cart" @click="sendProdToCart(product)">
+          <div class="hover-product__cart" @click="sendProdToCart(product); refetch()">
             <q-item class="q-item-car-img" v-ripple>
                 <img src="../assets/Catalog/cart_orange.webp" alt="" />
             </q-item>
@@ -54,7 +54,6 @@
 <script>
 import { provideApolloClient } from "@vue/apollo-composable";
 import gql from "graphql-tag";
-import {computed } from "vue";
 import { useMutation } from "@vue/apollo-composable";
 import { ApolloClient } from "@apollo/client/core";
 import { getClientOptions } from "src/apollo/index";
@@ -72,22 +71,6 @@ export default {
   setup(props) {
     const store = useStore();
     const refetch = store.getters.REFETCH;
-    // const MESSAGES = gql`
-    //     query MyQuery {
-    //       products {
-    //         category
-    //         discount
-    //         gender
-    //         name
-    //         oldprice
-    //         todayprice
-    //         url
-    //       }
-    //     }
-    //   `
-
-    // const messages = computed(() => store.getters.PRODUCTS);
-
     const sendProdToCart = function (product) {
       const apolloClient = new ApolloClient(getClientOptions());
 
@@ -135,18 +118,6 @@ export default {
             todayprice: product.todayprice,
             url: product.url,
           },
-      //     update: (cache, { data: { sendProduct } }) => {
-      //   let data = cache.readQuery({ query: MESSAGES })
-      //   data = {
-      //     ...data,
-      //     messages: [
-      //       ...data.messages,
-      //       sendProduct,
-      //     ],
-      //   }
-      //   cache.writeQuery({ query: MESSAGES, data })
-      // },
-
         })
       );
       sendProduct();

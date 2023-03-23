@@ -30,7 +30,7 @@
 <script>
 import CartForm from "../components/v-cart-form.vue";
 import CartItem from "../components/v-cart-item.vue";
-import { reactive, computed, ref } from "vue";
+import { reactive, computed, ref, watch } from "vue";
 import { useStore } from "vuex";
 
 export default {
@@ -48,10 +48,12 @@ export default {
 
     const loading = computed(() => store.getters.LOADING_CART);
 
-    const TOTALSUM = ref(
-      CART_PRODUCTS.values
-        ? CART_PRODUCTS.values.reduce((a, b) => a + b.todayprice, 0)
-        : ""
+    // const TOTALSUM = ref(
+    //   CART_PRODUCTS.values.reduce((a, b) => a + b.todayprice, 0)
+    // );
+
+    const TOTALSUM = computed(() =>
+      CART_PRODUCTS.values.reduce((a, b) => a + b.todayprice, 0)
     );
 
     const productPrice = (price) => {
@@ -61,7 +63,6 @@ export default {
     return {
       loading,
       CART_PRODUCTS,
-      // prodObjs,
       productPrice,
       TOTALSUM,
     };
