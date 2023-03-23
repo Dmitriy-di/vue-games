@@ -75,7 +75,7 @@ export default {
     PRODUCTS.values = computed(() => store.getters.PRODUCTS);
     PRODUCTS_FILTER.values = store.getters.PRODUCTS_FILTER;
 
-    var model = ref("Все товары");
+    let model = ref("Все товары");
     const genderParam = useRouter().currentRoute.value.query.gender
 
     switch (genderParam) {
