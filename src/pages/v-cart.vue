@@ -52,9 +52,22 @@ export default {
     //   CART_PRODUCTS.values.reduce((a, b) => a + b.todayprice, 0)
     // );
 
-    const TOTALSUM = computed(() =>
-      CART_PRODUCTS.values.reduce((a, b) => a + b.todayprice, 0)
-    );
+    const TOTALSUM = ref();
+    TOTALSUM.value = CART_PRODUCTS.values.reduce((a, b) => a + b.todayprice, 0);
+    // watch(CART_PRODUCTS.values.length, () => {
+    //   console.log("hello");
+    //   TOTALSUM.value = CART_PRODUCTS.values.reduce(
+    //     (a, b) => a + b.todayprice,
+    //     0
+    //   );
+    // });
+
+    watch(loading, () => {
+      TOTALSUM.value = CART_PRODUCTS.values.reduce(
+        (a, b) => a + b.todayprice,
+        0
+      );
+    });
 
     const productPrice = (price) => {
       TOTALSUM.value += price;
