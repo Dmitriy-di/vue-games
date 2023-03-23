@@ -57,8 +57,8 @@
         </div>
         <img src="~assets/Main/men.jpg" alt="Мужское" />
         <div class="content-category__btn">
-          <router-link to="/catalog"
-            ><button @click="clickMale">подробнее</button></router-link
+          <router-link :to="{ path: 'catalog', query: { gender: 'male' } }"
+            ><button>подробнее</button></router-link
           >
         </div>
       </div>
@@ -71,8 +71,8 @@
           <img src="~assets/Main/women.jpg" alt="Женское" />
         </div>
         <div class="content-category__btn">
-          <router-link to="/catalog"
-            ><button @click="clickFemale">подробнее</button></router-link
+          <router-link :to="{ path: 'catalog', query: { gender: 'female' } }"
+            ><button>подробнее</button></router-link
           >
         </div>
       </div>
