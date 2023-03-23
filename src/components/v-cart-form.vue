@@ -1,60 +1,71 @@
 <template>
-  <div class="registration-body__block block-registration">
+  <form
+    class="registration-body__block block-registration"
+    @submit.prevent="getFormValues"
+  >
     <div
       class="block-registration__column block-registration__column_breakpoint info-product__button_tab active"
     >
-      <div class="block-registration__row">
+      <div class="block-registration__row q-mb-md">
         <div class="block-registration__item">
           <label for="" class="block-registration__label"
             >Фамилия:&nbsp;<span>*</span></label
           >
-          <input type="text" class="block-registration__input" />
+          <input name="surname" type="text" class="block-registration__input" />
         </div>
         <div class="block-registration__item">
           <label for="" class="block-registration__label"
             >Имя:&nbsp;<span>*</span></label
           >
-          <input type="text" class="block-registration__input" />
+          <input name="name" type="text" class="block-registration__input" />
         </div>
         <div class="block-registration__item">
           <label for="" class="block-registration__label"
             >Отчество:&nbsp;<span>*</span></label
           >
-          <input type="text" class="block-registration__input" />
+          <input
+            name="patronymic"
+            type="text"
+            class="block-registration__input"
+          />
         </div>
         <div class="block-registration__item">
           <label for="" class="block-registration__label"
             >Моб. телефон:&nbsp;<span>*</span></label
           >
-          <input type="text" class="block-registration__input" />
+          <input
+            name="telephone"
+            type="text"
+            class="block-registration__input"
+          />
         </div>
         <div class="block-registration__item">
           <label for="" class="block-registration__label"
             >Ваш E-mail:&nbsp;<span>*</span></label
           >
-          <input type="text" class="block-registration__input" />
+          <input name="eMail" type="text" class="block-registration__input" />
         </div>
-        <div class="block-registration__item">
+        <!-- <div class="block-registration__item">
           <label for="" class="block-registration__label">Способ оплаты:</label>
-          <input type="text" class="block-registration__input" />
-        </div>
+          <input name="name" type="text" class="block-registration__input" />
+        </div> -->
         <div class="block-registration__item">
           <label for="" class="block-registration__label"
             >Индекс&nbsp;<span>*</span></label
           >
-          <input type="text" class="block-registration__input" />
+          <input name="index" type="text" class="block-registration__input" />
         </div>
         <div class="block-registration__item">
           <label for="" class="block-registration__label"
             >Город&nbsp;<span>*</span></label
           >
-          <input type="text" class="block-registration__input" />
+          <input name="city" type="text" class="block-registration__input" />
         </div>
         <div class="block-registration__item">
           <label for="" class="block-registration__label"
             >Адрес доставки:&nbsp;<span>*</span></label
           >
-          <input type="text" class="block-registration__input" />
+          <input name="adress" type="text" class="block-registration__input" />
         </div>
         <div class="block-registration__item">
           <label for="" class="block-registration__label">Комментарии:</label>
@@ -63,19 +74,127 @@
             class="block-registration__input block-registration__input_b"
           ></textarea>
         </div>
-        <div class="block-registration__subscribe"></div>
-        &nbsp;<span>*</span> Поля, обязательные для заполнения<br />
+        <div class="block-registration__subscribe q-mt-md">
+          &nbsp;<span>*</span> Поля, обязательные для заполнения
+        </div>
       </div>
     </div>
-  </div>
+    <div class="registration-body__send">
+      <button type="submit" class="registration-body__issue">
+        Оформить заказ
+      </button>
+    </div>
+  </form>
 </template>
 
-<script></script>
+<script>
+import { provideApolloClient } from "@vue/apollo-composable";
+import gql from "graphql-tag";
+import { useMutation } from "@vue/apollo-composable";
+import { ApolloClient } from "@apollo/client/core";
+import { getClientOptions } from "src/apollo/index";
+
+export default {
+  setup() {
+    // const getFormValues = function (e) {
+    //   console.log(Array.from(e.target.elements));
+    // };
+    const getFormValues = function (e) {
+      const apolloClient = new ApolloClient(getClientOptions());
+
+      provideApolloClient(apolloClient);
+      if (
+        Array.from(e.target.elements)
+          .map((a) => Boolean(a.value))
+          .reduce((a, b) => a + b, 0) == 8
+      ) {
+        const { mutate } = useMutation(
+          gql`
+            mutation MyMutation(
+              $adress: String!
+              $city: String!
+              $eMail: String!
+              $index: String!
+              $name: String!
+              $patronymic: String!
+              $surname: String!
+              $telephone: Int!
+            ) {
+              insert_orders_one(
+                object: {
+                  adress: $adress
+                  city: $city
+                  eMail: $eMail
+                  index: $index
+                  name: $name
+                  patronymic: $patronymic
+                  surname: $surname
+                  telephone: $telephone
+                }
+              ) {
+                adress
+                city
+                eMail
+                index
+                name
+                patronymic
+                surname
+                telephone
+              }
+            }
+          `,
+          () => ({
+            variables: {
+              adress: e.target.elements.adress.value,
+              city: e.target.elements.city.value,
+              // comment: e.target.elements.comment.value,
+              eMail: e.target.elements.eMail.value,
+              index: e.target.elements.index.value,
+              name: e.target.elements.name.value,
+              patronymic: e.target.elements.patronymic.value,
+              surname: e.target.elements.surname.value,
+              telephone: e.target.elements.telephone.value,
+            },
+          })
+        );
+        mutate();
+      } else {
+        console.log("Не все поля заполнены");
+      }
+    };
+    return {
+      getFormValues,
+    };
+  },
+};
+</script>
 
 <style lang="scss">
 .registration-body {
   &__form {
     margin: 28px 0 80px 0;
+  }
+  &__send {
+    width: 100%;
+    display: flex;
+    align-items: flex-end;
+    justify-content: right;
+  }
+  &__issue {
+    cursor: pointer;
+    display: inline-block;
+    border-radius: 15px;
+    font-family: "Roboto-Black";
+    font-size: 14px;
+    line-height: 24px;
+    text-transform: uppercase;
+    background-color: #f68038;
+    padding: 5px 20px;
+    color: #ffffff;
+    &:hover {
+      transition-duration: 0.2s;
+      background-color: #1ab9ce;
+    }
   }
 
   &__block {

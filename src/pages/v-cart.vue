@@ -23,7 +23,6 @@
       <div class="registration-body__total">
         Итого: <span> {{ TOTALSUM }} ₽</span>
       </div>
-      <div class="registration-body__issue">Оформить заказ</div>
     </div>
   </div>
 </template>
@@ -115,23 +114,6 @@ export default {
       @media (max-width: 500px) {
         font-size: 21px;
       }
-    }
-  }
-
-  &__issue {
-    cursor: pointer;
-    display: inline-block;
-    border-radius: 15px;
-    font-family: "Roboto-Black";
-    font-size: 14px;
-    line-height: 24px;
-    text-transform: uppercase;
-    background-color: #f68038;
-    padding: 5px 20px;
-    color: #ffffff;
-    &:hover {
-      transition-duration: 0.2s;
-      background-color: #1ab9ce;
     }
   }
 }

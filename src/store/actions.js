@@ -3,25 +3,6 @@ import gql from "graphql-tag";
 import { ApolloClient } from "@apollo/client/core";
 import { getClientOptions } from "src/apollo/index";
 
-// export const increment = ({ commit }) => {
-// 	commit('increment')
-//  }
-//  export const decrement = ({ commit }) => {
-// 	commit('decrement')
-//  }
-
-//  export const incrementIfOdd = ({ commit, state }) => {
-// 	if ((state.count + 1) % 2 === 0) {
-// 	  commit('increment')
-// 	}
-//  }
-
-//  export const incrementAsync = ({ commit }) => {
-// 	setTimeout(() => {
-// 	  commit('increment')
-// 	}, 1000)
-//  }
-
 export const GET_PRODUCTS = ({ commit }) => {
 	const fetching = async () => {
 		try {
@@ -41,6 +22,7 @@ export const GET_PRODUCTS = ({ commit }) => {
 	       `
 			);
 			commit("setProducts", { products: result?.value?.products, productsFilter: result?.value?.products, loading: loading })
+			console.log(result?.value?.products);
 		} catch (e) {
 			console.log("Ошибка:", e);
 		}
@@ -55,7 +37,7 @@ export const GET_CART_PRODUCTS = ({ commit }) => {
 			query MyQuery {
 			  cartItems {
 				 category
-				 discount
+				 discount 
 				 gender
 				 name
 				 oldprice
@@ -68,7 +50,6 @@ export const GET_CART_PRODUCTS = ({ commit }) => {
 				pollInterval: 1000,
 			}
 			);
-			console.log(refetch);
 			commit("setCartProducts", { CartProducts: result?.value?.cartItems, loading: loading, refetch: refetch })
 		} catch (e) {
 			console.log("Ошибка:", e);

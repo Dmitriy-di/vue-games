@@ -31,7 +31,7 @@
     </q-drawer>
 
     <q-page-container>
-      <router-view class="q-ma-md" />
+      <router-view class="q-ma-md"> </router-view>
     </q-page-container>
 
     <q-footer elevated class="bg-grey-8 text-white">
