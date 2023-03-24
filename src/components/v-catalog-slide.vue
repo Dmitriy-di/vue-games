@@ -33,7 +33,7 @@
           </div>
 
           <!-- <div class="hover-product__cart" @click="sendProdToCart(product); refetch()"> -->
-          <div class="hover-product__cart" @click="sendProdToCart(product); refetch()">
+          <div class="hover-product__cart" @click="sendProdToCart(product); increment()">
             <q-item class="q-item-car-img" v-ripple>
                 <img src="../assets/Catalog/cart_orange.webp" alt="" />
             </q-item>
@@ -71,6 +71,10 @@ export default {
   setup(props) {
     const store = useStore();
     const refetch = store.getters.REFETCH;
+
+const increment = () => store.commit('setQuantityProductsCart', 1)
+
+
     const sendProdToCart = function (product) {
       const apolloClient = new ApolloClient(getClientOptions());
 
@@ -89,7 +93,7 @@ export default {
           ) {
             insert_cartItems_one(
               object: {
-                category: $category
+                category: $category 
                 discount: $discount
                 gender: $gender
                 name: $name
@@ -124,7 +128,8 @@ export default {
     };
     return {
       sendProdToCart,
-      refetch
+      refetch,
+      increment
     };
   },
 };

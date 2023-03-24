@@ -26,3 +26,7 @@ export const LOADING_CATALOG = (state) => {
 export const REFETCH = (state) => {
 	return state.refetchCart
 }
+
+export const QUANTITY_PRODUCTS_CART = (state) => {
+	return state.quantityProductsCart
+}

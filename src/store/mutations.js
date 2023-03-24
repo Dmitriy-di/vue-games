@@ -14,3 +14,7 @@ export const setCartProducts = (state, { CartProducts, loading, refetch }) => {
 	state.loadingCart = loading
 	state.refetchCart = refetch
 }
+
+export const setQuantityProductsCart = (state, count) => {
+	state.quantityProductsCart = state.quantityProductsCart + count
+}

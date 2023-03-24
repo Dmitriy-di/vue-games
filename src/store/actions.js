@@ -1,5 +1,6 @@
-import { useQuery, provideApolloClient } from "@vue/apollo-composable";
+import { useQuery } from "@vue/apollo-composable";
 import gql from "graphql-tag";
+import { state } from "./index.js"
 
 export const GET_PRODUCTS = ({ commit }) => {
 	const fetching = async () => {
@@ -19,9 +20,7 @@ export const GET_PRODUCTS = ({ commit }) => {
 	         }
 	       `
 			);
-			console.log(1);
 			onResult(queryResult => {
-				console.log(2);
 				commit("setProducts", { products: queryResult?.data?.products, productsFilter: queryResult?.data?.products, loading: queryResult.loading })
 			})
 		} catch (e) {
@@ -53,6 +52,9 @@ export const GET_CART_PRODUCTS = ({ commit }) => {
 			);
 			onResult(queryResult => {
 				commit("setCartProducts", { CartProducts: queryResult?.data?.cartItems, loading: queryResult.loading, refetch: refetch })
+				if (state.quantityProductsCart <= 0) {
+					commit("setQuantityProductsCart", queryResult?.data?.cartItems.length)
+				}
 			})
 		} catch (e) {
 			console.log("Ошибка:", e);

@@ -3,13 +3,14 @@ import * as getters from './getters'
 import * as actions from './actions'
 import * as mutations from './mutations'
 
-const state = {
+export const state = {
   cart: [],
   products: [],
   productsFilter: [],
   loadingCart: {},
   loadingCatalog: {},
   refetchCart: {},
+  quantityProductsCart: 0,
 }
 
 const store = createStore({

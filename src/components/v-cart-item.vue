@@ -54,6 +54,7 @@ import gql from "graphql-tag";
 import { useMutation } from "@vue/apollo-composable";
 import { ApolloClient } from "@apollo/client/core";
 import { getClientOptions } from "src/apollo/index";
+import { useStore } from "vuex";
 
 export default {
   props: {
@@ -66,10 +67,13 @@ export default {
   },
   emits: ["productPrice"],
   setup(props, { emit }) {
-    const prodObjs = ref([]);
+    const store = useStore();
     const quantityProd = ref(1);
 
+    const increment = (num) => store.commit("setQuantityProductsCart", num);
+
     const addToCartItem = function (product) {
+      increment(1);
       quantityProd.value += 1;
       const priceAdd = product.todayprice;
       emit("productPrice", priceAdd);
@@ -78,8 +82,10 @@ export default {
     const substractCartItem = function (product) {
       if (quantityProd.value > 1) {
         quantityProd.value -= 1;
+        increment(-1);
         emit("productPrice", -product.todayprice);
       } else {
+        increment(-1);
         emit("productPrice", -product.todayprice);
         deleteCartItem(product);
       }
@@ -109,7 +115,6 @@ export default {
       addToCartItem,
       substractCartItem,
       quantityProd,
-      prodObjs,
       deleteCartItem,
     };
   },

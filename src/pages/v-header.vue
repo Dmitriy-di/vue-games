@@ -52,12 +52,16 @@
                 <p><span>Сб–Вс:</span> 10:00–20:00</p>
               </div>
             </div>
-            <div class="info-header__column info-header__column_orange">
-              <i class="v-catalog__icons material-icons basket"
-                >shopping_basket
-              </i>
-              <span class="info-header__cart">12</span>
-            </div>
+            <router-link :to="{ path: 'cart' }">
+              <div class="info-header__column info-header__column_orange">
+                <i class="v-catalog__icons material-icons basket"
+                  >shopping_basket
+                </i>
+                <span class="info-header__cart">{{
+                  quantityProductsCart
+                }}</span>
+              </div>
+            </router-link>
           </div>
         </div>
       </div>
@@ -66,8 +70,8 @@
 </template>
 
 <script>
-import { ref } from "vue";
-import Login from "../components/v-login.vue";
+import { ref, computed } from "vue";
+import { useStore } from "vuex";
 
 //import Clerk from "@clerk/clerk-js";
 const publishableKey =
@@ -125,20 +129,21 @@ const startClerk = async () => {
 })();
 
 export default {
-  components: {
-    Login,
-  },
-
   props: {},
   setup(props, { emit }) {
+    const store = useStore();
     const toggleLeftDrawer = function () {
       emit("toggleLeftDrawer");
     };
+    const quantityProductsCart = computed(
+      () => store.getters.QUANTITY_PRODUCTS_CART
+    );
 
     return {
       showLogIn: ref(false),
       showSignUp: ref(false),
       toggleLeftDrawer,
+      quantityProductsCart,
     };
   },
 };
