@@ -161,6 +161,10 @@ export default {
   }
 }
 
+
+.v-catalog__icons{
+  font-size: 30px;
+}
 .bottom-header {
   &__container {
     display: flex;

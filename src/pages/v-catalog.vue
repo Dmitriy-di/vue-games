@@ -73,29 +73,31 @@ export default {
     const PRODUCTS_FILTER = reactive([]);
     const loading = computed(() => store.getters.LOADING_CATALOG);
     PRODUCTS.values = computed(() => store.getters.PRODUCTS);
-    PRODUCTS_FILTER.values = computed(() => store.getters.PRODUCTS);
+    PRODUCTS_FILTER.values = store.getters.PRODUCTS_FILTER;
 
     let model = ref("Все товары");
-    const genderParam = useRouter().currentRoute.value.query.gender;
+    const genderParam = useRouter().currentRoute.value.query.gender
 
     switch (genderParam) {
-      case "male": {
+      case 'male': {
         model = ref("Мужская одежда");
         setTimeout(() => {
-          PRODUCTS_FILTER.values = PRODUCTS.values.filter((p) => {
-            console.log(p.gender);
-            return p.gender == true;
-          });
-        }, 300);
+          PRODUCTS_FILTER.values = PRODUCTS.values.filter(
+            (p) => {
+              console.log(p.gender);
+              return p.gender == true
+            }
+          );
+        }, 300)
         break;
       }
-      case "female": {
+      case 'female': {
         model = ref("Женская одежда");
         setTimeout(() => {
           PRODUCTS_FILTER.values = PRODUCTS.values.filter(
             (p) => p.gender == false
           );
-        }, 300);
+        }, 300)
         break;
       }
       default: {
@@ -109,9 +111,11 @@ export default {
           PRODUCTS_FILTER.values = PRODUCTS.values;
           break;
         case "Мужская одежда":
-          PRODUCTS_FILTER.values = PRODUCTS.values.filter((p) => {
-            return p.gender == true;
-          });
+          PRODUCTS_FILTER.values = PRODUCTS.values.filter(
+            (p) => {
+              return p.gender == true
+            }
+          );
           break;
         case "Женская одежда":
           PRODUCTS_FILTER.values = PRODUCTS.values.filter(
@@ -179,7 +183,6 @@ export default {
       mutate();
     };
     return {
-      // componentKey,
       loading,
       PRODUCTS_FILTER,
       model,
