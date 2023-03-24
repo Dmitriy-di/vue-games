@@ -58,7 +58,8 @@ export default {
 
     const TOTALSUM = ref();
     TOTALSUM.value = CART_PRODUCTS.values.reduce((a, b) => a + b.todayprice, 0);
-    // watch(CART_PRODUCTS.values.length, () => {
+
+    // watch(CART_PRODUCTS, () => {
     //   console.log("hello");
     //   TOTALSUM.value = CART_PRODUCTS.values.reduce(
     //     (a, b) => a + b.todayprice,
