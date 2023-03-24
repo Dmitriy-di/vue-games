@@ -46,9 +46,9 @@ export default {
     const CART_PRODUCTS = reactive([]);
     CART_PRODUCTS.values = computed(() => store.getters.CART_PRODUCTS);
 
-    const quantityProductsCart = computed(
-      () => store.getters.QUANTITY_PRODUCTS_CART
-    );
+    // const quantityProductsCart = computed(
+    //   () => store.getters.QUANTITY_PRODUCTS_CART
+    // );
 
     const loading = computed(() => store.getters.LOADING_CART);
 
