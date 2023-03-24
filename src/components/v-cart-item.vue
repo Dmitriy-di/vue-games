@@ -85,9 +85,12 @@ export default {
         increment(-1);
         emit("productPrice", -product.todayprice);
       } else {
-        increment(-1);
-        emit("productPrice", -product.todayprice);
-        deleteCartItem(product);
+        if (quantityProd.value - 1 >= 0) {
+          quantityProd.value -= 1;
+          increment(-1);
+          emit("productPrice", -product.todayprice);
+          deleteCartItem(product);
+        }
       }
     };
 
