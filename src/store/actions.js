@@ -1,7 +1,5 @@
 import { useQuery, provideApolloClient } from "@vue/apollo-composable";
 import gql from "graphql-tag";
-import { ApolloClient } from "@apollo/client/core";
-import { getClientOptions } from "src/apollo/index";
 
 export const GET_PRODUCTS = ({ commit }) => {
 	const fetching = async () => {
@@ -21,7 +19,9 @@ export const GET_PRODUCTS = ({ commit }) => {
 	         }
 	       `
 			);
+			console.log(1);
 			onResult(queryResult => {
+				console.log(2);
 				commit("setProducts", { products: queryResult?.data?.products, productsFilter: queryResult?.data?.products, loading: queryResult.loading })
 			})
 		} catch (e) {

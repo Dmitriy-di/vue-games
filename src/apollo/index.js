@@ -7,8 +7,9 @@ export /* async */ function getClientOptions(/* {app, router, ...} */ options) {
   })
 
   const authLink = setContext((_, { headers }) => {
+    // get the authentication token from local storage if it exists
     const token = sessionStorage.getItem("token");
-
+    // return the headers to the context so httpLink can read them
     return {
       headers: {
         ...headers,
@@ -22,17 +23,6 @@ export /* async */ function getClientOptions(/* {app, router, ...} */ options) {
       link: authLink.concat(httpLink),
       cache: new InMemoryCache(),
     },
-    // General options.
-    // {
-    //   link: createHttpLink({
-    //     uri:
-    //       process.env.GRAPHQL_URI ||
-    //       // Change to your graphql endpoint.
-    //       'https://firm-dassie-25.hasura.app/v1/graphql',
-    //   }),
-    //   cache: new InMemoryCache(),
-    // },
-    // Specific Quasar mode options.
     process.env.MODE === 'spa'
       ? {
         //

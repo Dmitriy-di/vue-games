@@ -42,9 +42,9 @@
         <div class="bottom-header__column">
           <div class="bottom-header__info info-header">
             <div class="info-header__column">
-              <a href="#" class="info-header__collback"
+              <!-- <a href="#" class="info-header__collback"
                 ><span>Обратный звонок</span></a
-              >
+              > -->
             </div>
             <div class="info-header__column">
               <div class="info-header__schedul">
@@ -97,14 +97,14 @@ const startClerk = async () => {
         "token",
         await Clerk.session?.getToken({ template: "hasura" })
       );
-      setInterval(
-        async () =>
-          sessionStorage.setItem(
-            "token",
-            await Clerk.session?.getToken({ template: "hasura" })
-          ),
-        1_000
-      );
+      // setInterval(
+      //   async () =>
+      //     sessionStorage.setItem(
+      //       "token",
+      //       await Clerk.session?.getToken({ template: "hasura" })
+      //     ),
+      //   1_000
+      // );
     }
   } catch (err) {
     console.error("Error starting Clerk: ", err);
@@ -176,6 +176,7 @@ export default {
 .actions-header {
   @media (max-width: 640px) {
     justify-content: space-between;
+    flex-direction: column;
   }
 
   span {
@@ -234,6 +235,7 @@ export default {
     font-size: 14px;
     line-height: 18px;
     padding: 0 55px 0 0px;
+    display: flex;
 
     @media (max-width: 1110px) {
       padding: 0 30px 0 0px;
@@ -283,7 +285,7 @@ export default {
     padding: 0 0 0 30px;
 
     @media (max-width: 640px) {
-      font-size: 16px;
+      font-size: 10px;
     }
 
     @media (max-width: 991.98px) {
